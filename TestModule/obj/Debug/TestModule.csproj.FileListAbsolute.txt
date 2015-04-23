@@ -1,0 +1,49 @@
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\obj\Debug\TestModule.csprojResolveAssemblyReference.cache
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\obj\Debug\TestPlugin.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\obj\Debug\TestPlugin.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\bin\Debug\TestPlugin.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\bin\Debug\TestPlugin.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\bin\Debug\MSW.Modules.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\bin\Debug\MSW.Modules.pdb
+C:\Users\john.earnshaw\GitHub\MSWModular\TestModule\bin\Debug\MSW.Modules.dll
+C:\Users\john.earnshaw\GitHub\MSWModular\TestModule\bin\Debug\MSW.Modules.pdb
+C:\Users\john.earnshaw\GitHub\MSWModular\TestModule\obj\Debug\TestModule.csprojResolveAssemblyReference.cache
+C:\Users\john.earnshaw\GitHub\MSWModular\TestModule\bin\Debug\TestModule.dll
+C:\Users\john.earnshaw\GitHub\MSWModular\TestModule\bin\Debug\TestModule.pdb
+C:\Users\john.earnshaw\GitHub\MSWModular\TestModule\obj\Debug\TestModule.dll
+C:\Users\john.earnshaw\GitHub\MSWModular\TestModule\obj\Debug\TestModule.pdb
+E:\MSWModular\TestModule\bin\Debug\TestModule.dll
+E:\MSWModular\TestModule\bin\Debug\TestModule.pdb
+E:\MSWModular\TestModule\bin\Debug\MSW.Modules.dll
+E:\MSWModular\TestModule\bin\Debug\MSW.Modules.pdb
+E:\MSWModular\TestModule\obj\Debug\TestModule.csprojResolveAssemblyReference.cache
+E:\MSWModular\TestModule\obj\Debug\TestModule.dll
+E:\MSWModular\TestModule\obj\Debug\TestModule.pdb
+C:\Users\john.earnshaw\GitHub\MSW.Modules\TestModule\bin\Debug\MSW Test Module.dll
+C:\Users\john.earnshaw\GitHub\MSW.Modules\TestModule\bin\Debug\MSW Test Module.pdb
+C:\Users\john.earnshaw\GitHub\MSW.Modules\TestModule\bin\Debug\MSW.Modules.dll
+C:\Users\john.earnshaw\GitHub\MSW.Modules\TestModule\bin\Debug\MSW.Modules.pdb
+C:\Users\john.earnshaw\GitHub\MSW.Modules\TestModule\obj\Debug\TestModule.csprojResolveAssemblyReference.cache
+C:\Users\john.earnshaw\GitHub\MSW.Modules\TestModule\obj\Debug\MSW Test Module.dll
+C:\Users\john.earnshaw\GitHub\MSW.Modules\TestModule\obj\Debug\MSW Test Module.pdb
+E:\MSW.Modules\TestModule\bin\Debug\MSW Test Module.dll
+E:\MSW.Modules\TestModule\bin\Debug\MSW Test Module.pdb
+E:\MSW.Modules\TestModule\bin\Debug\MSW.Modules.dll
+E:\MSW.Modules\TestModule\bin\Debug\MSW.Modules.pdb
+E:\MSW.Modules\TestModule\obj\Debug\TestModule.csprojResolveAssemblyReference.cache
+E:\MSW.Modules\TestModule\obj\Debug\MSW Test Module.dll
+E:\MSW.Modules\TestModule\obj\Debug\MSW Test Module.pdb
+F:\MSW.Modules\TestModule\obj\Debug\TestModule.csprojResolveAssemblyReference.cache
+F:\MSW.Modules\TestModule\obj\Debug\MSW Test Module.dll
+F:\MSW.Modules\TestModule\obj\Debug\MSW Test Module.pdb
+F:\MSW.Modules\TestModule\bin\Debug\MSW Test Module.dll
+F:\MSW.Modules\TestModule\bin\Debug\MSW Test Module.pdb
+F:\MSW.Modules\TestModule\bin\Debug\MSW.Modules.dll
+F:\MSW.Modules\TestModule\bin\Debug\MSW.Modules.pdb
+C:\Users\John\Documents\BitBucket\Modular\TestModule\bin\Debug\TestModule.dll
+C:\Users\John\Documents\BitBucket\Modular\TestModule\bin\Debug\TestModule.pdb
+C:\Users\John\Documents\BitBucket\Modular\TestModule\bin\Debug\Modular.dll
+C:\Users\John\Documents\BitBucket\Modular\TestModule\bin\Debug\Modular.pdb
+C:\Users\John\Documents\BitBucket\Modular\TestModule\obj\Debug\TestModule.csprojResolveAssemblyReference.cache
+C:\Users\John\Documents\BitBucket\Modular\TestModule\obj\Debug\TestModule.dll
+C:\Users\John\Documents\BitBucket\Modular\TestModule\obj\Debug\TestModule.pdb

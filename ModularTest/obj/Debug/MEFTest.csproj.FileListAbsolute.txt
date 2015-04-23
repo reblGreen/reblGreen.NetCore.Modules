@@ -1,0 +1,10 @@
+C:\Users\john.earnshaw\GitHub\MEFTest\MEFTest\bin\Debug\MEFTest.exe.config
+C:\Users\john.earnshaw\GitHub\MEFTest\MEFTest\bin\Debug\MEFTest.exe
+C:\Users\john.earnshaw\GitHub\MEFTest\MEFTest\bin\Debug\MEFTest.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\MEFTest\obj\Debug\MEFTest.csprojResolveAssemblyReference.cache
+C:\Users\john.earnshaw\GitHub\MEFTest\MEFTest\obj\Debug\MEFTest.exe
+C:\Users\john.earnshaw\GitHub\MEFTest\MEFTest\obj\Debug\MEFTest.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\MEFTest\bin\Debug\Plugins.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\MEFTest\bin\Debug\Plugins.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\MEFTest\bin\Debug\TestPlugin.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\MEFTest\bin\Debug\TestPlugin.pdb

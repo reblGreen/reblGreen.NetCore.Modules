@@ -1,0 +1,5 @@
+C:\Users\john.earnshaw\GitHub\MEFTest\Plugin\bin\Debug\Plugins.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\Plugin\bin\Debug\Plugins.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\Plugin\obj\Debug\Plugins.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\Plugin\obj\Debug\Plugins.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\Plugin\obj\Debug\Plugins.csprojResolveAssemblyReference.cache

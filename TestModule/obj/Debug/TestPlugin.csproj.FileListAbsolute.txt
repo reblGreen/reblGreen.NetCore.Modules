@@ -1,0 +1,14 @@
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\bin\Debug\TestProcessPlugin.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\bin\Debug\TestProcessPlugin.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\bin\Debug\Plugin.Core.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\bin\Debug\Plugin.Core.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\obj\Debug\TestPlugin.csprojResolveAssemblyReference.cache
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\obj\Debug\TestProcessPlugin.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\obj\Debug\TestProcessPlugin.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\bin\Debug\TestPlugin.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\bin\Debug\TestPlugin.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\bin\Debug\Plugins.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\bin\Debug\Plugins.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\obj\Debug\TestPlugin.csprojResolveAssemblyReference.cache
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\obj\Debug\TestPlugin.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestPlugin\obj\Debug\TestPlugin.pdb

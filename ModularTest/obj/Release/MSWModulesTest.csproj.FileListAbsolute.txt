@@ -1,0 +1,20 @@
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSWModulesTest\bin\Release\MSWModulesTest.exe.config
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSWModulesTest\bin\Release\MSWModulesTest.exe
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSWModulesTest\bin\Release\MSWModulesTest.pdb
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSWModulesTest\bin\Release\MSW Test Module.dll
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSWModulesTest\bin\Release\MSW.Modules.dll
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSWModulesTest\bin\Release\MSW.Modules.pdb
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSWModulesTest\bin\Release\MSW Test Module.pdb
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSWModulesTest\obj\Release\MSWModulesTest.csprojResolveAssemblyReference.cache
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSWModulesTest\obj\Release\MSWModulesTest.exe
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSWModulesTest\obj\Release\MSWModulesTest.pdb
+E:\MSW.Modules\MSWModulesTest\bin\Release\MSWModulesTest.exe.config
+E:\MSW.Modules\MSWModulesTest\obj\Release\MSWModulesTest.exe
+E:\MSW.Modules\MSWModulesTest\obj\Release\MSWModulesTest.pdb
+E:\MSW.Modules\MSWModulesTest\bin\Release\MSWModulesTest.exe
+E:\MSW.Modules\MSWModulesTest\bin\Release\MSWModulesTest.pdb
+E:\MSW.Modules\MSWModulesTest\bin\Release\MSW Test Module.dll
+E:\MSW.Modules\MSWModulesTest\bin\Release\MSW.Modules.dll
+E:\MSW.Modules\MSWModulesTest\bin\Release\MSW.Modules.pdb
+E:\MSW.Modules\MSWModulesTest\bin\Release\MSW Test Module.pdb
+E:\MSW.Modules\MSWModulesTest\obj\Release\MSWModulesTest.csprojResolveAssemblyReference.cache

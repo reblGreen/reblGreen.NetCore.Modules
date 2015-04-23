@@ -1,0 +1,11 @@
+C:\Users\John\Documents\BitBucket\Modular\MSWModulesTest\bin\Debug\ModularTest.exe.config
+C:\Users\John\Documents\BitBucket\Modular\ModularTest\bin\Debug\ModularTest.exe.config
+C:\Users\John\Documents\BitBucket\Modular\ModularTest\obj\Debug\ModularTest.csprojResolveAssemblyReference.cache
+C:\Users\John\Documents\BitBucket\Modular\ModularTest\bin\Debug\ModularTest.exe
+C:\Users\John\Documents\BitBucket\Modular\ModularTest\bin\Debug\ModularTest.pdb
+C:\Users\John\Documents\BitBucket\Modular\ModularTest\bin\Debug\Modular.dll
+C:\Users\John\Documents\BitBucket\Modular\ModularTest\bin\Debug\TestModule.dll
+C:\Users\John\Documents\BitBucket\Modular\ModularTest\bin\Debug\Modular.pdb
+C:\Users\John\Documents\BitBucket\Modular\ModularTest\bin\Debug\TestModule.pdb
+C:\Users\John\Documents\BitBucket\Modular\ModularTest\obj\Debug\ModularTest.exe
+C:\Users\John\Documents\BitBucket\Modular\ModularTest\obj\Debug\ModularTest.pdb

@@ -1,0 +1,10 @@
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSW.Modules\bin\Release\MSW.Modules.dll
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSW.Modules\bin\Release\MSW.Modules.pdb
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSW.Modules\obj\Release\MSW.Modules.dll
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSW.Modules\obj\Release\MSW.Modules.pdb
+C:\Users\john.earnshaw\GitHub\MSW.Modules\MSW.Modules\obj\Release\MSW.Modules.csprojResolveAssemblyReference.cache
+E:\MSW.Modules\MSW.Modules\bin\Release\MSW.Modules.dll
+E:\MSW.Modules\MSW.Modules\bin\Release\MSW.Modules.pdb
+E:\MSW.Modules\MSW.Modules\obj\Release\MSW.Modules.dll
+E:\MSW.Modules\MSW.Modules\obj\Release\MSW.Modules.pdb
+E:\MSW.Modules\MSW.Modules\obj\Release\MSW.Modules.csprojResolveAssemblyReference.cache

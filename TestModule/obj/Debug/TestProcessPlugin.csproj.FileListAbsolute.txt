@@ -1,0 +1,7 @@
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\bin\Debug\TestProcessPlugin.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\bin\Debug\TestProcessPlugin.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\bin\Debug\MEFTest.exe
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\bin\Debug\MEFTest.pdb
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\obj\Debug\TestProcessPlugin.csprojResolveAssemblyReference.cache
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\obj\Debug\TestProcessPlugin.dll
+C:\Users\john.earnshaw\GitHub\MEFTest\TestProcessPlugin\obj\Debug\TestProcessPlugin.pdb
