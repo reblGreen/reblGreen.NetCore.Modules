@@ -1,5 +1,4 @@
 C:\Users\John\Documents\BitBucket\Modular\Modular\bin\Debug\Modular.dll
 C:\Users\John\Documents\BitBucket\Modular\Modular\bin\Debug\Modular.pdb
-C:\Users\John\Documents\BitBucket\Modular\Modular\obj\Debug\Modular.csprojResolveAssemblyReference.cache
 C:\Users\John\Documents\BitBucket\Modular\Modular\obj\Debug\Modular.dll
 C:\Users\John\Documents\BitBucket\Modular\Modular\obj\Debug\Modular.pdb

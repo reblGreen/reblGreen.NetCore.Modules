@@ -1,5 +1,0 @@
-C:\Users\john.earnshaw\GitHub\MEFTest\Plugin.Core\bin\Debug\Plugin.Core.dll
-C:\Users\john.earnshaw\GitHub\MEFTest\Plugin.Core\bin\Debug\Plugin.Core.pdb
-C:\Users\john.earnshaw\GitHub\MEFTest\Plugin.Core\obj\Debug\Plugin.Core.csprojResolveAssemblyReference.cache
-C:\Users\john.earnshaw\GitHub\MEFTest\Plugin.Core\obj\Debug\Plugin.Core.dll
-C:\Users\john.earnshaw\GitHub\MEFTest\Plugin.Core\obj\Debug\Plugin.Core.pdb
