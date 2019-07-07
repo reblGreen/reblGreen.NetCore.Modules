@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reblGreen.NetCore.Modules", "reblGreen.NetCore.Modules\reblGreen.NetCore.Modules.csproj", "{4478C105-A40A-48CC-BA45-10BFE63684C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reblGreen.NetCore.Modules.ChatBot", "reblGreen.NetCore.Modules.ChatBot\reblGreen.NetCore.Modules.ChatBot.csproj", "{E3EB9869-D239-4D91-81D3-CE25016136FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4478C105-A40A-48CC-BA45-10BFE63684C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4478C105-A40A-48CC-BA45-10BFE63684C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4478C105-A40A-48CC-BA45-10BFE63684C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4478C105-A40A-48CC-BA45-10BFE63684C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3EB9869-D239-4D91-81D3-CE25016136FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3EB9869-D239-4D91-81D3-CE25016136FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3EB9869-D239-4D91-81D3-CE25016136FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3EB9869-D239-4D91-81D3-CE25016136FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53CCD21D-C79E-4B82-A250-A756CDBD3361}
+	EndGlobalSection
+EndGlobal

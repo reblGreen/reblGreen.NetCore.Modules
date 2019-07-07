@@ -1,7 +1,0 @@
-C:\Users\John\Documents\BitBucket\Modular\TestModule\bin\Debug\TestModule.dll
-C:\Users\John\Documents\BitBucket\Modular\TestModule\bin\Debug\TestModule.pdb
-C:\Users\John\Documents\BitBucket\Modular\TestModule\bin\Debug\Modular.dll
-C:\Users\John\Documents\BitBucket\Modular\TestModule\bin\Debug\Modular.pdb
-C:\Users\John\Documents\BitBucket\Modular\TestModule\obj\Debug\TestModule.csprojResolveAssemblyReference.cache
-C:\Users\John\Documents\BitBucket\Modular\TestModule\obj\Debug\TestModule.dll
-C:\Users\John\Documents\BitBucket\Modular\TestModule\obj\Debug\TestModule.pdb
