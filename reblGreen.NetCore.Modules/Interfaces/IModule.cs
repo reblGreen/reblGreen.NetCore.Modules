@@ -23,6 +23,7 @@
     THE SOFTWARE.
  */
 
+using reblGreen.NetCore.Modules.Events;
 using System;
 using System.Collections.Generic;
 
@@ -32,7 +33,7 @@ namespace reblGreen.NetCore.Modules.Interfaces
     /// An IModule is an <see cref="IEventHandler">IEventHandler</see> which can be manipulated by an <see cref="IModuleHost">IModuleHost</see>.
     /// This interface exposes members to the IModuleHost which identify both the IModule itself and what IEvents it is able to handle.
     /// </summary>
-    public interface IModule : IEventHandler<IEvent<IEventInput, IEventOutput>, IEventInput, IEventOutput>
+    public interface IModule : IEventHandler
     {
         /// <summary>
         /// Each module requires a reference to the IModuleHost which parents the module. Make sure you set this property!
@@ -73,23 +74,45 @@ namespace reblGreen.NetCore.Modules.Interfaces
 
 
         /// <summary>
-        /// This method should be invoked by IModuleHost to start it up and this module should not be accessed until this has been called. 
-        /// Attempting to access another module in a module's constructor or in this method may fail 
-        /// if the requested plugin is not loaded yet. A module should set its started property to true after code is executed.
+        /// Implemented due to demand. An object implementing IModule may often require the ability to retrieve configurable settings. This method is implemented in Module
+        /// and acts as a wrapper for pushing a GetSettingEvent into the IModuleHost for handling. If a module is not provided to handle the GetSettingEvent then retrieving
+        /// the requested setting will fail. Functionality can be overridden. For security reasons this IModule should not be allowed to access another IModule instances settings.
+        /// </summary>
+        /// <typeparam name="T">The type of the required setting.</typeparam>
+        /// <param name="name">The identifier string for the required setting. This is passed to the generated LoggingEvent for handling.</param>
+        /// <param name="@default">The default setting to use if a configured setting is not available or if the returned setting is the wrong type.</param>
+        T GetSetting<T>(string name, T @default = default(T));
+
+
+        /// <summary>
+        /// Implemented due to demand. An object implementing IModule may often require the ability to log debug data and analytics. This method is implemented in Module
+        /// and acts as a wrapper for pushing a LoggingEvent into the IModuleHost for handling. If a module is not provided to handle the LoggingEvent then logging will
+        /// fail. This Functionality can be overridden on a per-module basis.
+        /// </summary>
+        /// <param name="severity">The severity of logging required. This is passed to the generated LoggingEvent for handling.</param>
+        /// <param name="args">The arguments to be logged. These are passed to the generated LoggingEvent for handling.</param>
+        void Log(LoggingEvent.Severity severity, params object[] args);
+
+
+        /// <summary>
+        /// This method should be invoked by IModuleHost when the module is first loading. It allows for a module to initialize or request handling of an IModuleEvent
+        /// by a module whose loading priority is higher than its own. Attempting to request data from another module in a module's constructor will fail and requesting
+        /// data from a module in this invocation may fail if the required module is not yet loaded.
         /// </summary>
         void OnLoading();
 
 
         /// <summary>
-        /// This method should be invoked by IModuleHost when all modules are loaded. other modules should only be accessed when this method is invoked or from the 
-        /// IModuleHost's RunModuleMethod function. Attempting to access another module in a module's before now may fail if the requested plugin is not loaded yet.
+        /// This method should be invoked by IModuleHost when a module is loaded. Any cross-module activity should only occur when this method is invoked to allow for
+        /// each module to initialize itself during the OnLoading method. Attempting to request that a module handles an event before now may fail if the reuired plugin
+        /// is not yet completelyloaded.
         /// </summary>
         void OnLoaded();
 
 
         /// <summary>
-        /// This method should be invoked by the IModuleHost just before all modules are going to be unloaded and the host should attempt to delay termination for a few
-        /// seconds to allow any finalization. If you need to do some last minute cross module access, do it now!
+        /// This method should be invoked by the IModuleHost just before a module is going to be unloaded and the host should attempt to delay any final application
+        /// termination for a number of seconds to allow for any per-module finalization.
         /// </summary>
         void OnUnloading();
 
@@ -99,26 +122,5 @@ namespace reblGreen.NetCore.Modules.Interfaces
         /// to try and access other modules inside this method.
         /// </summary>
         void OnUnloaded();
-
-
-        /// <summary>
-        /// An object implementing IModule may often require the ability to retrieve configurable settings. This method is provided and should be used for requesting
-        /// module settings. For security reasons this IModule should not be allowed to access another IModule instances settings.
-        /// </summary>
-        /// <typeparam name="T">The type of the required setting.</typeparam>
-        /// <param name="settingId">The identifier string for the required setting.</param>
-        /// <param name="default">The default setting to use if a configured setting is not available.</param>
-        T GetSetting<T>(string settingId, T @default = default(T));
-
-
-        /// <summary>
-        /// This method is similar to <see cref="GetSetting{T}(string, T)"/> but returns a resource instead. This could be a file or shared configuration, it allows
-        /// for fine granular control of where resources are loaded from.
-        /// </summary>
-        /// <typeparam name="T">The type of the required resource.</typeparam>
-        /// <param name="settingId">The identifier string for the required resource.</param>
-        /// <param name="defaultSetting">The default to return if the required resource is not available.</param>
-        /// <returns></returns>
-        T GetResource<T>(string resourceId, T @default = default(T));
     }
 }

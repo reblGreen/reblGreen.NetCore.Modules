@@ -25,10 +25,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace reblGreen.NetCore.Modules.Interfaces
 {
-    public interface IModuleHost : IEventHandler<IEvent<IEventInput, IEventOutput>, IEventInput, IEventOutput>
+    public interface IModuleHost : IEventHandler
     {
         /// <summary>
         /// The arguments that are passed to the executing application while it is launching. This allows instances implementing IModule
@@ -68,6 +69,6 @@ namespace reblGreen.NetCore.Modules.Interfaces
         /// <summary>
         /// This should return a list of all events currently being handled. Pipeline can check this list to see if an event is in progress.
         /// </summary>
-        IDictionary<string, IEvent> EventsInProgress { get; }
+        IReadOnlyDictionary<string, IEvent> EventsInProgress { get; }
     }
 }

@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using reblGreen.NetCore.Modules.Classes;
 using reblGreen.NetCore.Modules.Interfaces;
 
@@ -34,6 +35,8 @@ namespace reblGreen.NetCore.Modules
     {
         readonly ModuleCollection _ModuleCollection;
         readonly EventCollection _EventCollection;
+        readonly Dictionary<string, IEvent> _EventsInProgress;
+        readonly ReadOnlyDictionary<string, IEvent> _ReadOnlyEventsInProgress;
 
         /// <summary>
         /// 
@@ -58,6 +61,10 @@ namespace reblGreen.NetCore.Modules
             var moduleCollection = new ModuleCollection(this);
             moduleCollection.ImportModules();
             _ModuleCollection = moduleCollection;
+
+            _EventsInProgress = new Dictionary<string, IEvent>();
+            _ReadOnlyEventsInProgress = new ReadOnlyDictionary<string, IEvent>(_EventsInProgress);
+
         }
 
         ~ModuleHost()
@@ -113,7 +120,12 @@ namespace reblGreen.NetCore.Modules
         }
 
 
-        public virtual IDictionary<string, IEvent> EventsInProgress { get; } = new Dictionary<string, IEvent>();
+        public virtual IReadOnlyDictionary<string, IEvent> EventsInProgress {
+            get
+            {
+                return _ReadOnlyEventsInProgress;
+            }
+        }
 
 
         public virtual bool CanHandle(IEvent e)
@@ -124,13 +136,25 @@ namespace reblGreen.NetCore.Modules
 
         public virtual void Handle(IEvent e)
         {
-            e.SetMetaValue("id", Guid.NewGuid());
+            // We generate a unique ID for the event and add it to the IEvent.Meta dictionary. This unique ID can be used to
+            // Track and monitor the event during the handling process through the exposed EventsInProgress property.
 
-            EventsInProgress.Add(e.GetMetaValue("id", Guid.NewGuid()).ToString(), e);
+            var id = string.Format("{0}-{1}", e.GetHashCode().ToString("X2").ToLowerInvariant(), Guid.NewGuid());
+            e.SetMetaValue("id", id);
 
+            lock (_EventsInProgress)
+            {
+                _EventsInProgress.Add(id, e);
+            }
+
+            // Pass the event over to the ModuleCollection for handling. This keeps things more readable in this class.
             _ModuleCollection.Handle(e);
-            
-            EventsInProgress.Remove(e.GetMetaValue("id", Guid.NewGuid()).ToString());
+
+            // Once the event is completed we need to remove it from the EventsInProgress list.
+            lock (_EventsInProgress)
+            {
+                _EventsInProgress.Remove(id);
+            }
         }
     }
 }

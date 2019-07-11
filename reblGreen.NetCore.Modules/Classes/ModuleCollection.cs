@@ -32,7 +32,7 @@ namespace reblGreen.NetCore.Modules.Classes
 {
     [Serializable]
     public class ModuleCollection : List<Type>, IModuleCollection,
-        IEventHandler<IEvent<IEventInput, IEventOutput>, IEventInput, IEventOutput>,
+        IEventHandler,
         IEventPreHandler<IEvent>,
         IEventPostHandler<IEvent>
     {
@@ -227,7 +227,7 @@ namespace reblGreen.NetCore.Modules.Classes
         }
 
 
-        public virtual IList<IModule> GetPreHandlers(IEvent e)
+        public virtual IList<IEventPreHandler> GetPreHandlers(IEvent e)
         {
             var type = e.GetType();
             var handler = typeof(IEventPreHandler<>);
@@ -235,11 +235,11 @@ namespace reblGreen.NetCore.Modules.Classes
                 c.ModuleType.GetInterfaces().Any(i =>
                 i.IsGenericType && i.GetGenericTypeDefinition() == handler && i.GenericTypeArguments[0].IsAssignableFrom(type)));
 
-            return handlers.Select(h => h.Module as IModule).ToList();
+            return handlers.Select(h => h.Module as IEventPreHandler).ToList();
         }
 
 
-        public virtual IList<IModule> GetPostHandlers(IEvent e)
+        public virtual IList<IEventPostHandler> GetPostHandlers(IEvent e)
         {
             var type = e.GetType();
             var handler = typeof(IEventPostHandler<>);
@@ -247,7 +247,7 @@ namespace reblGreen.NetCore.Modules.Classes
                 c.ModuleType.GetInterfaces().Any(i =>
                 i.IsGenericType && i.GetGenericTypeDefinition() == handler && i.GenericTypeArguments[0].IsAssignableFrom(type)));
 
-            return handlers.Select(h => h.Module as IModule).ToList();
+            return handlers.Select(h => h.Module as IEventPostHandler).ToList();
         }
 
 
@@ -282,16 +282,7 @@ namespace reblGreen.NetCore.Modules.Classes
             var handlers = GetPreHandlers(e);
             foreach (var handler in handlers)
             {
-                (handler as IEventPreHandler).OnBeforeHandle(e);
-
-                //try
-                //{
-                //    handler.GetType().GetMethod("OnBeforeHandle").Invoke(handler, new object[] { e });
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw new Exception(string.Format("{0} module OnBeforeHandle method failed with an exception. See inner exception for more details.", handler.ModuleAttributes.Name), ex);
-                //}
+                handler.OnBeforeHandle(e);
             }
         }
 
@@ -301,7 +292,7 @@ namespace reblGreen.NetCore.Modules.Classes
             var handlers = GetPostHandlers(e);
             foreach (var handler in handlers)
             {
-                (handler as IEventPostHandler).OnHandled(e);
+                handler.OnHandled(e);   
             }
         }
     }

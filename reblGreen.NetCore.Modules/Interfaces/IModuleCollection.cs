@@ -28,7 +28,7 @@ using System.Collections.Generic;
 
 namespace reblGreen.NetCore.Modules.Interfaces
 {
-    public interface IModuleCollection : ICollection<Type>
+    public interface IModuleCollection
     {
         IModuleHost Host { get; }
 
@@ -84,9 +84,19 @@ namespace reblGreen.NetCore.Modules.Interfaces
         IList<IModule> GetModulesByType<T>() where T : IModule;
 
 
-        IList<IModule> GetPreHandlers(IEvent e);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        IList<IEventPreHandler> GetPreHandlers(IEvent e);
 
 
-        IList<IModule> GetPostHandlers(IEvent e);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        IList<IEventPostHandler> GetPostHandlers(IEvent e);
     }
 }

@@ -28,7 +28,7 @@ using System.Collections.Generic;
 
 namespace reblGreen.NetCore.Modules.Interfaces
 {
-    public interface IEventCollection : ICollection<Type>
+    public interface IEventCollection
     {
         /// <summary>
         /// Return a instance of an Event object which implements <see cref="IEvent{I, O}"/>.

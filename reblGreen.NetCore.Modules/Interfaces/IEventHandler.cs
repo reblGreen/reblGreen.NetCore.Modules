@@ -27,22 +27,9 @@ namespace reblGreen.NetCore.Modules.Interfaces
 {
     /// <summary>
     /// An instance which implements IEventHandler can handle objects which implement IEvent.
-    /// A handler can be strictly types using the generic arguments or can handle any type of
-    /// event by strictly typing the interfaces directly. 
     /// </summary>
-    public interface IEventHandler<E, I, O>
-        where E : IEvent<I, O>
-        where I : IEventInput
-        where O : IEventOutput
+    public interface IEventHandler
     {
-        ///// <summary>
-        ///// CanHandle can be called by the IEvent host to see if this handler is able to handle the requested event. This
-        ///// allows the handler to inspect the IEvent and inform the requester if it can be handled without further processing.
-        ///// </summary>
-        ///// <returns></returns>
-        //bool CanHandle<T>() where T : IEvent<IEventInput, IEventOutput>;
-
-
         /// <summary>
         /// CanHandle can be called by the IEvent host to see if this handler is able to handle the requested event. This
         /// allows the handler to inspect the IEvent and inform the requester if it can be handled without further processing.
@@ -50,14 +37,6 @@ namespace reblGreen.NetCore.Modules.Interfaces
         /// <param name="e">The IEvent to inspect for handling.</param>
         /// <returns></returns>
         bool CanHandle(IEvent e);
-
-
-        ///// <summary>
-        ///// Pass an IEvent to this EventHandler for it to be processed. All EventHandlers should handle any IEvents which are
-        ///// known to the EventHandler within this method.
-        ///// </summary>
-        ///// <param name="e">The IEvent to be handled.</param>
-        //void Handle<T>(T e) where T : IEvent<IEventInput, IEventOutput>;
 
 
         /// <summary>
