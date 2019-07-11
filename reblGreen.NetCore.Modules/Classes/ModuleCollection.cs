@@ -96,7 +96,7 @@ namespace reblGreen.NetCore.Modules.Classes
             // We add the containers and sort them by the order in which they should be loaded, which is specified using the
             // ModuleDetails.ModuleLoadPriority property.
 
-            var containers = TypeManager.FindModules<Module>(Host, Host.WorkingDirectory);
+            var containers = TypeManager.FindModules<Module>(Host, Host.WorkingDirectory, 1);
             Containers.AddRange(containers.OrderBy(module => module.ModuleDetails.LoadPriority));
 
 

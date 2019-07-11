@@ -1,4 +1,4 @@
-# reblGreen.NetCore.Modules # 
+# reblGreen.NetCore.Modules #
 
 An MIT license .NET Core 2.0 C# Class Library which offers an open-source system for creating event driven modular (plugin based) applications. reblGreen.NetCore.Modules was started as a sample project I put together which demonstrated an implementation of Microsoft .NET [Managed Extensibility Framework (MEF)](https://msdn.microsoft.com/en-us/magazine/ee291628.aspx) which is included in .NET Framework since version 4.0 but is also available as an external component at [codeplex](https://mef.codeplex.com/). This project was to demonstrate the benifits of a strict modular design pattern for complex applications to my peers 
 
@@ -16,7 +16,7 @@ ___
 
 ### How do I get set up? ###
 
-Check out the reblGreen.NetCore.Modules.ChatModule project in the source code. This project shows the basic implementation of a Module in the form of a 1980s style chatbot. There is also a basic ModuleHost for loading modules and handling events. There are no other dependency requirements in this project to keep it simple. When using reblGreen.NetCore.Modules in production I prefer to keep modules and corresponding events is seperate class libraries, but in this case for simplicity the ChatModule module, its corresponding ChatModuleEvent and a BasicModuleHost are contained in a single project.
+Check out the reblGreen.NetCore.Modules.ChatModule project in the source code. This project shows the basic implementation of a Module in the form of a late 1900s style chatbot. There is also a basic ModuleHost for loading modules and handling events. There are no other dependency requirements in this project to keep it simple. When using reblGreen.NetCore.Modules in production I prefer to keep modules and corresponding events is seperate class libraries, but in this case for simplicity the ChatModule module, its corresponding ChatModuleEvent and a BasicModuleHost are contained in a single project.
   
 The project and example are well documented and should be self explanatory but if you get stuck or have any questions, please contact me and I'll be glad to help out.
 ___

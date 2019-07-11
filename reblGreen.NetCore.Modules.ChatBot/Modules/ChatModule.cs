@@ -36,8 +36,9 @@ namespace reblGreen.NetCore.Modules.ChatBot
     public class ChatModule : Module, IEventPostHandler<ChatModuleEvent>, IEventPreHandler<ChatModuleEvent>
     {
         /*
-         * This example module shows the most basic usage of a module or plugin. This is in the form of a 1980s style chatbot
-         * so don't expect anything super! If you want a better chatbot then code it yourself. Remember, this is an example.
+         * This example module shows the most basic usage of a module or plugin. This is in the form of a late 1900s style chatbot so
+         * don't expect anything special! If you want a really clever chatbot then use NLP, Tensorflow and GPT-2 and code it yourself.
+         * Remember, this is just an example.
          */
 
         /// <summary>

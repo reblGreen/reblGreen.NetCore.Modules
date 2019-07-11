@@ -39,13 +39,15 @@ namespace reblGreen.NetCore.Modules.Classes
 
 
         /// <summary>
-        /// Find Modules. 
+        /// Find Modules. Direcotry depth can be controlled and is set to maximum depth by default. If you would like to create modules which
+        /// are also ModuleHosts themselves, it is a good idea nest modules one directory level deep followed by nesting submodules another
+        /// level deep. This will isolate parent modules from submodules.
         /// </summary>
-        /// <param name="path">  Where to search for DLL's that export IModule. </param>
-        /// <param name="recursive"> Should subdirectories of basePath be searched </param>
-        public static IList<IModuleContainer> FindModules<T>(IModuleHost host, Uri path, bool recursive = false) where T : Module
+        /// <param name="path">Where to search for DLL's which export IModule.</param>
+        /// <param name="directoryDepth">How many subdirectories deep of path be searched.</param>
+        public static IList<IModuleContainer> FindModules<T>(IModuleHost host, Uri path, int directoryDepth = int.MaxValue) where T : Module
         {
-            var types = DllTypeSearch(typeof(T), path, recursive);
+            var types = DllTypeSearch(typeof(T), path, directoryDepth);
             var containers = new List<IModuleContainer>();
 
             foreach (var t in types)
@@ -68,13 +70,15 @@ namespace reblGreen.NetCore.Modules.Classes
 
 
         /// <summary>
-        /// Find Modules. 
+        /// Find Events. Direcotry depth can be controlled and is set to maximum depth by default. If you would like to create modules which
+        /// are also ModuleHosts themselves, it is a good idea nest modules one directory level deep followed by nesting submodules another
+        /// level deep. This will isolate parent module events from submodule events.
         /// </summary>
-        /// <param name="path">  Where to search for DLL's that export IModule. </param>
-        /// <param name="recursive"> Should subdirectories of basePath be searched </param>
-        public static IList<Type> FindEvents<T>(Uri path, bool recursive = false) where T : IEvent
+        /// <param name="path">Where to search for DLL's which export IEvent.</param>
+        /// <param name="directoryDepth">How many subdirectories deep of path be searched.</param>
+        public static IList<Type> FindEvents<T>(Uri path, int directoryDepth = int.MaxValue) where T : IEvent
         {
-            var types = DllTypeSearch(typeof(T), path, recursive);
+            var types = DllTypeSearch(typeof(T), path, directoryDepth);
             var events = new List<Type>();
 
             foreach (var t in types)
@@ -91,17 +95,19 @@ namespace reblGreen.NetCore.Modules.Classes
         }
 
 
-        private static List<Type> DllTypeSearch(Type @type, Uri path, bool recursive)
+        private static List<Type> DllTypeSearch(Type @type, Uri path, int directoryDepth = int.MaxValue)
         {
-            //path = Path.GetFullPath(path);
+            var startingDepth = Count(Path.DirectorySeparatorChar, path.LocalPath);
+
             if (!Directory.Exists(path.LocalPath))
             {
                 throw new ArgumentException(string.Format("Invalid basePath specified (does not exist): {0}", path.LocalPath));
             }
 
-            var dlls = Directory.GetFiles(path.LocalPath, "*.dll", recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).ToList();
-            dlls.AddRange(Directory.GetFiles(path.LocalPath, "*.exe", recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly));
+            var dlls = Directory.GetFiles(path.LocalPath, "*.dll", SearchOption.AllDirectories).ToList();
+            dlls.AddRange(Directory.GetFiles(path.LocalPath, "*.exe", SearchOption.AllDirectories));
 
+            dlls = dlls.Where(d => Count(Path.DirectorySeparatorChar, d) <= startingDepth + directoryDepth).ToList();
             var useable = dlls.SelectMany((dll) => GetUseableTypes(new Uri(dll), @type)).ToList();
             return useable;
         }
@@ -124,6 +130,17 @@ namespace reblGreen.NetCore.Modules.Classes
 
             loader.Unload();
             return ret;
+        }
+
+
+        private static int Count(char needle, string haystack)
+        {
+            if (haystack == null)
+            {
+                return 0;
+            }
+
+            return haystack.Count(c => c == needle);
         }
     }
 }

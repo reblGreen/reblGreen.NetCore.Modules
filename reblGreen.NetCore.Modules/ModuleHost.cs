@@ -39,9 +39,10 @@ namespace reblGreen.NetCore.Modules
         readonly ReadOnlyDictionary<string, IEvent> _ReadOnlyEventsInProgress;
 
         /// <summary>
-        /// 
+        /// Creates a new instance of ModuleHost. When using startup args in your application, you can pass these args through to ModuleHost
+        /// so they can be inspected by any module which may require them.
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">Arguments to pass to modules.</param>
         public ModuleHost(string[] args = null)
         {
 
@@ -62,9 +63,9 @@ namespace reblGreen.NetCore.Modules
             moduleCollection.ImportModules();
             _ModuleCollection = moduleCollection;
 
+            // Create the events tracking list and a readonly wrapper to pass in the IModuleHost.EventsInProgress property.
             _EventsInProgress = new Dictionary<string, IEvent>();
             _ReadOnlyEventsInProgress = new ReadOnlyDictionary<string, IEvent>(_EventsInProgress);
-
         }
 
         ~ModuleHost()
