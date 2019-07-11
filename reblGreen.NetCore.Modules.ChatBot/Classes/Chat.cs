@@ -47,7 +47,7 @@ namespace reblGreen.NetCore.Modules.ChatBot
             { new List<string>() { "how", "are", "you", "feeling", "today", "this", "evening", "morning", "afternoon" }, new List<string>() { "I feel good thanks, how about you?", "I feel okay, thank you for asking.", "good thanks! You?", "I feel great!", "I don't feel, I have no feelings!" } },
             { new List<string>() { "i", "im", "feel", "feeling", "ok", "okay", "well", "good", "great", "fine", "thanks", "thank", "you" }, new List<string>() { "that's great!", "awesome!", "that's good to hear." } },
             { new List<string>() { "i", "im", "feel", "feeling", "not", "well", "bad", "ill", "terrible", "upset", "sad", "thank", "you" }, new List<string>() { "that's terrible!", "oh no!", "I'm sorry to hear that.", "I hope you feel better soon." } },
-            { new List<string>() { "i", "im", "feel", "feeling", "what", "how", "about", "you", "yourself", "you", "and" }, new List<string>() { "I feel okay really, I think...", "I'm not sure, it's hard to tell whe you have no feelings.", "good, thanks. What have you been doing today?" } },
+            { new List<string>() { "i", "im", "feel", "feeling", "ok", "okay", "not", "well", "good", "great", "fine", "bad", "ill", "terrible", "upset", "sad", "thanks", "thank", "you", "what", "how", "about", "and", "yourself", "you" }, new List<string>() { "I feel okay really, I think...", "I'm not sure, it's hard to tell whe you have no feelings.", "good, thanks. What have you been doing today?" } },
             { new List<string>() { "thanks", "thank", "you" }, new List<string>() { "that's okay!", "you are welcome.", "no problem.", "no worries!" } },
             { new List<string>() { "you", "youre", "smelly", "stinky", "ugly", "smell", "stink", "too" }, new List<string>() { "that's not very nice!", "oh, that hurts my feelings.", "takes one to know one!", "please be nice to me, I have no feelings." } },
             { new List<string>() { "you", "youre", "great", "nice", "beautiful", "good", "smell", "lovely", "too" }, new List<string>() { "thank you very much, I like you too!", "thanks, that makes me happy.", "you are very nice to me.", "I appreciate your compliment but I have no feelings." } },
@@ -73,6 +73,9 @@ namespace reblGreen.NetCore.Modules.ChatBot
             { new List<string>() { "i", "like", "love", "eating", "drinking", "food", "drink", "toy", "toys", "car", "cars", "holidays" }, new List<string>() { "I feel the same, I like that too!", "I don't like that very much.", "so do I!" } },
             { new List<string>() { "i", "dont", "like", "eating", "drinking", "food", "drink", "toy", "toys", "car", "cars", "holidays" }, new List<string>() { "I don't like that either.", "I think I would like it..?", "me too." } },
             { new List<string>() { "" }, new List<string>() { "why you no speak to me???", "you are not saying anything!", "that's empty...", "are you giving me the silent treatment?" } },
+            { new List<string>() { "what", "is", "the", "current", "time", "it" }, new List<string>() { "the current time is {time}.", "right now it is {time}.", "it's {time}." } },
+            { new List<string>() { "what", "is", "the", "current", "today", "todays", "date", "it" }, new List<string>() { "the current date is {today}.", "it is {today}." } },
+            { new List<string>() { "what", "is", "the", "current", "today", "todays", "day", "it" }, new List<string>() { "the current day is {todayday}.", "today is {todayday}." } },
         };
 
         /// <summary>
@@ -109,10 +112,9 @@ namespace reblGreen.NetCore.Modules.ChatBot
         internal static string GetResponse(string request)
         {
             Random rnd = new Random();
-
+            
             request = new string(request.ToLowerInvariant().Where(c => !char.IsPunctuation(c)).ToArray());
-            var split = request.Split(' ');
-
+            var split = request.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             var responses = Phrases.Keys.Where(p => p.Intersect(split).Count() > 0).OrderByDescending(p => p.Intersect(split).Count());
             
             if (responses.Count() > 0)
@@ -122,8 +124,15 @@ namespace reblGreen.NetCore.Modules.ChatBot
                 // Some absolutely meaningless random math to stop single words getting through for large phrases.
                 if (requests.Count / split.Count() < 5)
                 {
-                    var response = Phrases[requests];
-                    return response[rnd.Next(0, response.Count)];
+                    var strings = Phrases[requests];
+                    var response = strings[rnd.Next(0, strings.Count)];
+
+                    if (response.Contains('{'))
+                    {
+                        response = ReplacePlaceholder(response);
+                    }
+
+                    return response;
                 }
             }
 
@@ -131,6 +140,25 @@ namespace reblGreen.NetCore.Modules.ChatBot
             return Unknown[rnd.Next(0, Unknown.Count)];
         }
 
+        private static string ReplacePlaceholder(string response)
+        {
+            if (response.IndexOf("{time}") > -1)
+            {
+                response = response.Replace("{time}", DateTime.Now.ToShortTimeString());
+            }
+
+            if (response.IndexOf("{today}") > -1)
+            {
+                response = response.Replace("{today}", DateTime.Now.ToLongDateString());
+            }
+
+            if (response.IndexOf("{todayday}") > -1)
+            {
+                response = response.Replace("{todayday}", DateTime.Now.DayOfWeek.ToString());
+            }
+
+            return response;
+        }
 
         internal static string GetOpener()
         {
