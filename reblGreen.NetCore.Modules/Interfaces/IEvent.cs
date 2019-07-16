@@ -35,13 +35,15 @@ namespace reblGreen.NetCore.Modules.Interfaces
         where O : IEventOutput
     {
         /// <summary>
-        /// 
+        /// The Input property must inherit IEventInput and acts as a placeholder for any properties, fields or other data which can be passed to
+        /// an IEventHandler as arguments.
         /// </summary>
         I Input { get; }
 
 
         /// <summary>
-        /// 
+        /// The Output object inherits from IEventOutput and is used for returning any properties, fields or other data while an IEvent is being
+        /// handled by an IEventHandler.
         /// </summary>
         O Output { get; set; }
     }
@@ -50,7 +52,8 @@ namespace reblGreen.NetCore.Modules.Interfaces
     public interface IEvent
     {
         /// <summary>
-        /// 
+        /// Each IEvent which is loaded into ModuleHost should have a unique name which can be used to identify the event type where the concrete
+        /// type of the IEvent object is unknown.
         /// </summary>
         EventName Name { get; }
 
@@ -62,6 +65,6 @@ namespace reblGreen.NetCore.Modules.Interfaces
         /// <summary>
         /// Handled should return true only if the event was completed.
         /// </summary>
-        bool Handled { get; }
+        bool Handled { get; set; }
     }
 }
