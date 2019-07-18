@@ -24,13 +24,32 @@
  */
 
 using System;
-using reblGreen.NetCore.Modules.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace reblGreen.NetCore.Modules.ChatBot
+namespace reblGreen.NetCore.Modules.TestApplication
 {
-    [Serializable]
-    public class ChatModuleEventInput : IEventInput
+    public class Chat
     {
-        public string Request { get; set; }
+        /// <summary>
+        /// Openers contains a list of opening sentences, these are hopefully to get a conversation going..?
+        /// </summary>
+        static List<string> Openers = new List<string>()
+        {
+            "hi, how are you?",
+            "would you like to chat?",
+            "do you need something?",
+            "I'm here if you would like to talk?",
+            "please ask me a question.",
+            "please talk to me!",
+            "hey there!"
+        };
+
+
+        internal static string GetOpener()
+        {
+            Random rnd = new Random();
+            return Openers[rnd.Next(0, Openers.Count)];
+        }
     }
 }

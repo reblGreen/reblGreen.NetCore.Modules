@@ -25,6 +25,7 @@
 
 using System;
 using reblGreen.NetCore.Modules.Interfaces;
+using reblGreen.NetCore.Modules.ChatBot.Events;
 
 namespace reblGreen.NetCore.Modules.ChatBot
 {
@@ -55,7 +56,7 @@ namespace reblGreen.NetCore.Modules.ChatBot
              * event type you wish to handle. ModuleHost selects modules to handle an event type
              * based on the return value of this method.
              */
-            if (e is ChatModuleEvent @event)
+            if (e is ChatModuleEvent)
             {
                 return true;
             }

@@ -38,7 +38,7 @@ namespace reblGreen.NetCore.Modules.Classes
     {
         string AssemblyPath;
         Assembly LoadedAssembly;
-        List<Assembly> ReferencedAssemblies;
+        static List<Assembly> ReferencedAssemblies;
 
         public AssemblyLoader(Uri path)
         {
@@ -74,6 +74,12 @@ namespace reblGreen.NetCore.Modules.Classes
         }
 
 
+        public Assembly Load()
+        {
+            return Load(AssemblyPath);
+        }
+
+
         protected override Assembly Load(AssemblyName assemblyName)
         {
             return Load(assemblyName.Name);
@@ -89,18 +95,22 @@ namespace reblGreen.NetCore.Modules.Classes
 
             Assembly assembly = null;
             var current = AppDomain.CurrentDomain.GetAssemblies();
-            var loaded = current.Where(x => x.Location == assemblyName);
 
-            if (loaded.Count() > 0)
+            // It's possible that assemblyName can equal both the path to an assembly file location or the simple
+            // name of an assembly. We must compare against both when checking currently loaded assemblies.
+            var loaded = current.FirstOrDefault(x => x.Location == assemblyName || x.GetName().Name == assemblyName);
+
+            if (loaded != null)
             {
-                assembly = loaded.First();
+                assembly = loaded;
             }
             else if (ReferencedAssemblies != null)
             {
-                loaded = ReferencedAssemblies.Where(x => x.Location == assemblyName);
-                if (loaded.Count() > 0)
+                // See comment above ^^^^
+                loaded = ReferencedAssemblies.FirstOrDefault(x => x.Location == assemblyName || x.GetName().Name == assemblyName);
+                if (loaded != null)
                 {
-                    assembly = loaded.First();
+                    assembly = loaded;
                 }
             }
 
@@ -143,12 +153,6 @@ namespace reblGreen.NetCore.Modules.Classes
         }
 
 
-        public Assembly Load()
-        {
-            return Load(AssemblyPath);
-        }
-
-
         protected override IntPtr LoadUnmanagedDll(string unmanagedDllName)
         {
             string libraryPath = GetPossibleReferencePath(unmanagedDllName);
@@ -163,7 +167,7 @@ namespace reblGreen.NetCore.Modules.Classes
 
         public void Unload()
         {
-            if (LoadedAssembly !=  null)
+            if (LoadedAssembly != null)
             {
                 LoadedAssembly = null;
             }
@@ -216,54 +220,10 @@ namespace reblGreen.NetCore.Modules.Classes
         }
 
 
-        public Module InstantiateModule(Type module)
+        public Type[] GetTypes()
         {
-            var type = typeof(Module);
-
-            if (LoadedAssembly == null)
-            {
-                LoadedAssembly = Load();
-            }
-
-            foreach (Type t in LoadedAssembly.GetTypes())
-            {
-                if ((type == t || type.IsAssignableFrom(t)) && !t.IsAbstract && !t.IsInterface)
-                {
-                    if (t == module)
-                    {
-                        var result = Activator.CreateInstance(t) as Module;
-                        if (result != null)
-                        {
-                            return result;
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
-
-
-        public static IEvent InstantiateEvent(Type t)
-        {
-            try
-            {
-                if (Activator.CreateInstance(t) is IEvent result)
-                {
-                    if (!t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEvent<,>)))
-                    {
-                        throw new Exception("A type implementing IEvent interface must use generic arguments IEvent<IEventInput, IEventOutput> to identify the event input and output types.");
-                    }
-
-                    return result;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("A type implementing IEvent<IEventInput, IEventOutput> interface must contain a public parameterless constructor.", ex);
-            }
-
-            return null;
+            Load();
+            return LoadedAssembly.GetTypes();
         }
     }
 }

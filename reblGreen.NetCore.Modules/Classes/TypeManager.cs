@@ -133,9 +133,72 @@ namespace reblGreen.NetCore.Modules.Classes
         }
 
 
+        public static Module InstantiateModule(Type module, AssemblyLoader loader)
+        {
+            var type = typeof(Module);
+            loader.Load();
+
+            foreach (Type t in loader.GetTypes())
+            {
+                if ((type == t || type.IsAssignableFrom(t)) && !t.IsAbstract && !t.IsInterface)
+                {
+                    if (t == module)
+                    {
+                        var result = Activator.CreateInstance(t) as Module;
+                        if (result != null)
+                        {
+                            return result;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+
+        public static IEvent InstantiateEvent(Type t)
+        {
+            try
+            {
+                AssemblyLoader loader = new AssemblyLoader(new Uri(t.Assembly.Location));
+                var loaded = loader.GetTypes();
+
+                if (loaded.Length > 0)
+                {
+                    t = loaded.First(l => l.FullName.Equals(t.FullName));
+                }
+
+                if (Activator.CreateInstance(t) is IEvent result)
+                {
+                    if (!t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEvent<,>)))
+                    {
+                        throw new Exception(
+                            "A type implementing IEvent interface must use generic arguments IEvent<IEventInput, IEventOutput> to identify the event input and output types."
+                        );
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("A type implementing IEvent<IEventInput, IEventOutput> interface must contain a public parameterless constructor.", ex);
+            }
+
+            return null;
+        }
+
+
+        /// <summary>
+        /// A simple method for counting instances of the same character within a string.
+        /// This is used to discover and control the directory depth of a module or event in the FindModules, FindEvents and
+        /// DllTypeSearch methods above.
+        /// </summary>
         private static int Count(char needle, string haystack)
         {
-            if (haystack == null)
+            // If the string is empty there are certainly no instances of needle...
+            if (string.IsNullOrEmpty(haystack))
             {
                 return 0;
             }

@@ -57,7 +57,7 @@ namespace reblGreen.NetCore.Modules.Classes
 
             foreach (var @event in events)
             {
-                Instantiated.Add(@event, AssemblyLoader.InstantiateEvent(@event));
+                Instantiated.Add(@event, TypeManager.InstantiateEvent(@event));
             }
 
             Imported = true;
@@ -84,7 +84,7 @@ namespace reblGreen.NetCore.Modules.Classes
                 return null;
             }
 
-            return AssemblyLoader.InstantiateEvent(instantiated.Key);
+            return TypeManager.InstantiateEvent(instantiated.Key);
         }
 
 
@@ -96,7 +96,7 @@ namespace reblGreen.NetCore.Modules.Classes
                 return null;
             }
 
-            return AssemblyLoader.InstantiateEvent(instantiated.Key);
+            return TypeManager.InstantiateEvent(instantiated.Key);
         }
 
 
@@ -108,7 +108,7 @@ namespace reblGreen.NetCore.Modules.Classes
                 return null;
             }
 
-            return AssemblyLoader.InstantiateEvent(instantiated.Key);
+            return TypeManager.InstantiateEvent(instantiated.Key);
         }
     }
 }

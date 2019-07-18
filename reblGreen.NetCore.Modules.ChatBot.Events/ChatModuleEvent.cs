@@ -23,48 +23,38 @@
     THE SOFTWARE.
  */
 
+using System;
 using System.Collections.Generic;
+using reblGreen.NetCore.Modules.Interfaces;
 
-namespace reblGreen.NetCore.Modules.Interfaces
+namespace reblGreen.NetCore.Modules.ChatBot.Events
 {
-    /// <summary>
-    /// An object which implements IEvent can be handled by an instance which implements IEventHandler.
-    /// </summary>
-    public interface IEvent<I, O> : IEvent
-        where I : IEventInput
-        where O : IEventOutput
+    [Serializable]
+    public class ChatModuleEvent : IEvent<ChatModuleEventInput, ChatModuleEventOutput>
     {
         /// <summary>
-        /// The Input property must inherit IEventInput and acts as a placeholder for any properties, fields or other data which can be passed to
-        /// an IEventHandler as arguments.
+        /// Each IEvent must specify a name
         /// </summary>
-        I Input { get; set; }
-
+        public EventName Name { get; } = "reblGreen.NetCore.Modules.ChatBot.ChatModuleEvent";
 
         /// <summary>
-        /// The Output object inherits from IEventOutput and is used for returning any properties, fields or other data while an IEvent is being
-        /// handled by an IEventHandler.
+        /// 
         /// </summary>
-        O Output { get; set; }
-    }
-
-
-    public interface IEvent
-    {
-        /// <summary>
-        /// Each IEvent which is loaded into ModuleHost should have a unique name which can be used to identify the event type where the concrete
-        /// type of the IEvent object is unknown.
-        /// </summary>
-        EventName Name { get; }
+        public Dictionary<string, object> Meta { get; set; }
 
         /// <summary>
-        /// The Meta dictionary can be used to transfer and hold any generic data regarding the event between modules.
+        /// 
         /// </summary>
-        Dictionary<string, object> Meta { get; set; }
+        public bool Handled { get; set; }
 
         /// <summary>
-        /// Handled should return true only if the event was completed.
+        /// 
         /// </summary>
-        bool Handled { get; set; }
+        public ChatModuleEventInput Input { get; set; } = new ChatModuleEventInput();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ChatModuleEventOutput Output { get; set; }
     }
 }

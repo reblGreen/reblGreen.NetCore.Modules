@@ -24,37 +24,13 @@
  */
 
 using System;
-using System.Collections.Generic;
 using reblGreen.NetCore.Modules.Interfaces;
 
-namespace reblGreen.NetCore.Modules.ChatBot
+namespace reblGreen.NetCore.Modules.ChatBot.Events
 {
     [Serializable]
-    public class ChatModuleEvent : IEvent<ChatModuleEventInput, ChatModuleEventOutput>
+    public class ChatModuleEventInput : IEventInput
     {
-        /// <summary>
-        /// Each IEvent must specify a name
-        /// </summary>
-        public EventName Name { get; } = "reblGreen.NetCore.Modules.ChatBot.ChatModuleEvent";
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Dictionary<string, object> Meta { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool Handled { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ChatModuleEventInput Input { get; } = new ChatModuleEventInput();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ChatModuleEventOutput Output { get; set; }
+        public string Request { get; set; }
     }
 }

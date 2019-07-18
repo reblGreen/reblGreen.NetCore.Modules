@@ -1,4 +1,4 @@
-﻿namespace reblGreen.NetCore.Modules.ChatBot
+﻿namespace reblGreen.NetCore.Modules.TestApplication
 {
     class BasicModuleHost : ModuleHost
     {

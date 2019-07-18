@@ -24,46 +24,13 @@
  */
 
 using System;
+using reblGreen.NetCore.Modules.Interfaces;
 
-namespace reblGreen.NetCore.Modules.ChatBot
+namespace reblGreen.NetCore.Modules.ChatBot.Events
 {
-    class Program
+    [Serializable]
+    public class ChatModuleEventOutput : IEventOutput
     {
-        static void Main(string[] args)
-        {
-            ModuleHost host = new BasicModuleHost();
-            host.Modules.LoadModules();
-
-            Console.WriteLine("...");
-            Console.WriteLine("...");
-
-            Console.WriteLine("Hello World! I'm a chatbot, {0}", Chat.GetOpener());
-
-            Console.WriteLine("...");
-            Console.WriteLine("...");
-
-            var testSolidEvent = host.Events.GetSolidEventFromName("reblGreen.NetCore.Modules.ChatBot.ChatModuleEvent");
-
-            while (true)
-            {
-                var request = Console.ReadLine();
-                var e = new ChatModuleEvent();
-
-                e.Input.Request = request;
-
-                if (host.CanHandle(e))
-                {
-                    host.Handle(e);
-                }
-
-                if (e.Handled && e.Output != null)
-                {
-                    Console.WriteLine(e.Output.Response);
-                }
-                
-                Console.WriteLine("...");
-                Console.WriteLine("...");
-            }
-        }
+        public string Response { get; set; }
     }
 }

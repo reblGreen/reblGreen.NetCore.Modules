@@ -37,7 +37,7 @@ namespace reblGreen.NetCore.Modules.Events
     [Serializable]
     public class GetSettingEvent : IEvent<GetSettingEventInput, GetSettingEventOutput>
     {
-        public GetSettingEventInput Input { get; } = new GetSettingEventInput();
+        public GetSettingEventInput Input { get; set; } = new GetSettingEventInput();
 
         public GetSettingEventOutput Output { get; set; }
 

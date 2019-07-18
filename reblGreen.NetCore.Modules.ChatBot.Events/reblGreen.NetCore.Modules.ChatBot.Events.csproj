@@ -1,14 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <ApplicationIcon />
-    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\reblGreen.NetCore.Modules.ChatBot.Events\reblGreen.NetCore.Modules.ChatBot.Events.csproj" />
     <ProjectReference Include="..\reblGreen.NetCore.Modules\reblGreen.NetCore.Modules.csproj" />
   </ItemGroup>
 

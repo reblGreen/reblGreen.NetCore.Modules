@@ -72,7 +72,7 @@ namespace reblGreen.NetCore.Modules.Classes
         public void InitializeModule()
         {
             LoadContext.Load();
-            var module = LoadContext.InstantiateModule(ModuleType);
+            var module = TypeManager.InstantiateModule(ModuleType, LoadContext);
             module.ModuleAttributes = ModuleDetails;
             module.Host = Host;
             Module = module;

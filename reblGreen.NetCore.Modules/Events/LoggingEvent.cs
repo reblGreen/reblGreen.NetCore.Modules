@@ -38,7 +38,7 @@ namespace reblGreen.NetCore.Modules.Events
     [Serializable]
     public class LoggingEvent : IEvent<LoggingEventInput, LoggingEventOutput>
     {
-        public LoggingEventInput Input { get; } = new LoggingEventInput();
+        public LoggingEventInput Input { get; set; } = new LoggingEventInput();
 
         public LoggingEventOutput Output { get; set; }
 

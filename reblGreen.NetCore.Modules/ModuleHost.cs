@@ -56,11 +56,12 @@ namespace reblGreen.NetCore.Modules
             }
 
             var eventCollection = new EventCollection(this);
-            eventCollection.ImportEvents();
-            _EventCollection = eventCollection;
-
             var moduleCollection = new ModuleCollection(this);
+
             moduleCollection.ImportModules();
+            eventCollection.ImportEvents();
+
+            _EventCollection = eventCollection;
             _ModuleCollection = moduleCollection;
 
             // Create the events tracking list and a readonly wrapper to pass in the IModuleHost.EventsInProgress property.
