@@ -32,9 +32,16 @@ namespace reblGreen.NetCore.Modules.Interfaces
     {
         IModuleHost Host { get; }
 
+
         /// <summary>
-        /// This should return a list of loaded modules. Pipeline can check this list for other modules that they may depend on. If an IEvent is passed
-        /// to this method, a list containing only loaded modules which are able to process the event should be returned.
+        /// This should return a list containing the ModuleName for all known modules whether they are loaded or not.
+        /// </summary>
+        IList<ModuleName> GetModuleNames();
+
+
+        /// <summary>
+        /// This should return a list of loaded modules. Other modules can check this list for modules which they may depend on. If an IEvent is passed
+        /// to this method, a list containing only loaded modules which are able to handle the event type should be returned.
         /// </summary>
         IList<IModule> GetLoadedModules(IEvent @event = null);
 

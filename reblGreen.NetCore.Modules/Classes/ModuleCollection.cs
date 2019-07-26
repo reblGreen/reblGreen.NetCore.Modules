@@ -50,6 +50,12 @@ namespace reblGreen.NetCore.Modules.Classes
         }
 
 
+        public IList<ModuleName> GetModuleNames()
+        {
+            return Containers.Select(c => c.ModuleDetails.Name).ToList();
+        }
+
+
         public virtual IList<IModule> GetLoadedModules(IEvent e = null)
         {
             if (e == null)
@@ -97,10 +103,10 @@ namespace reblGreen.NetCore.Modules.Classes
             // ModuleDetails.ModuleLoadPriority property.
 
             var containers = TypeManager.FindModules<Module>(Host, Host.WorkingDirectory, 1);
-            Containers.AddRange(containers.OrderBy(module => module.ModuleDetails.LoadPriority));
+            Containers.AddRange(containers.OrderByDescending(module => module.ModuleDetails.LoadPriority));
 
 
-            AddRange(containers.OrderBy(module => module.ModuleDetails.HandlePriority).Select(module => module.ModuleType));
+            AddRange(containers.OrderByDescending(module => module.ModuleDetails.HandlePriority).Select(module => module.ModuleType));
             Imported = true;
         }
 
@@ -154,6 +160,7 @@ namespace reblGreen.NetCore.Modules.Classes
                 if (!c.Module.Loaded)
                 {
                     c.Module.OnLoading();
+                    c.Module.Loaded = true;
                 }
             }
 
@@ -164,10 +171,9 @@ namespace reblGreen.NetCore.Modules.Classes
                     continue;
                 }
 
-                if (!c.Module.Loaded)
+                if (c.Module.Loaded)
                 {
                     c.Module.OnLoaded();
-                    c.Module.Loaded = true;
                 }
             }
         }

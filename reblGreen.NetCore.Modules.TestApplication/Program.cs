@@ -33,6 +33,8 @@ namespace reblGreen.NetCore.Modules.TestApplication
         static void Main(string[] args)
         {
             ModuleHost host = new BasicModuleHost();
+            var names = host.Modules.GetModuleNames();
+
             host.Modules.LoadModules();
 
             Console.WriteLine("...");
