@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Authors>John Earnshaw</Authors>
@@ -14,6 +15,14 @@
     <PackageTags>plugins plugin modules module framework</PackageTags>
     <PackageLicenseUrl>https://tldrlegal.com/license/mit-license</PackageLicenseUrl>
     <Description>A .NET Core open-source framework for constructing event-driven modular systems. This project was started as a simple project which demonstrated a simple implementation of .NET Managed Extensibility Framework (MEF). It has since grown into an advanced framework designed to simplify building cross-platform plugin-based applications using C# and platforms which support .NET Core class libraries.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\Dev\BitBucket\reblgreen.netcore.modules\reblGreen.NetCore.Modules\reblGreen.NetCore.Modules.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile />
   </PropertyGroup>
 
 </Project>

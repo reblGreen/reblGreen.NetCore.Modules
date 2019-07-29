@@ -236,9 +236,27 @@ namespace reblGreen.NetCore.Modules
 
         #region Overrides
 
+
         public override string ToString()
         {
             return ModuleAttributes.Name;
+        }
+
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Module module)
+            {
+                return module.ModuleAttributes.Name.Equals(ModuleAttributes.Name);
+            }
+
+            return base.Equals(obj);
+        }
+
+
+        public override int GetHashCode()
+        {
+            return ModuleAttributes.Name.GetHashCode();
         }
 
 
