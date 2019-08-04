@@ -33,6 +33,9 @@ using reblGreen.NetCore.Modules.Interfaces;
 
 namespace reblGreen.NetCore.Modules.Classes
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public class AssemblyLoader : AssemblyLoadContext
     {

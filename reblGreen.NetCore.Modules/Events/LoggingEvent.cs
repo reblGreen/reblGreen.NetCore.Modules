@@ -38,6 +38,15 @@ namespace reblGreen.NetCore.Modules.Events
     [Serializable]
     public class LoggingEvent : IEvent<LoggingEventInput, LoggingEventOutput>
     {
+        public enum Severity
+        {
+            Analytics,
+            Debug,
+            Error,
+            Warning
+        }
+
+
         public LoggingEventInput Input { get; set; } = new LoggingEventInput();
 
         public LoggingEventOutput Output { get; set; }
@@ -49,12 +58,40 @@ namespace reblGreen.NetCore.Modules.Events
         public bool Handled { get; set; }
 
 
-        public enum Severity
+        /// <summary>
+        /// It has been required by modules which are designed to handle generic types of IEvent and need access to IModuleEvent.Input where available.
+        /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
+        /// directly. This can be done with <see cref="System.Reflection"/> or more efficiently using dynamic casting.
+        /// Eg. return ((dynamic)this).Input as IEventInput;
+        /// </summary>
+        public IEventInput GetEventInput()
         {
-            Analytics,
-            Debug,
-            Error,
-            Warning
+            return ((dynamic)this).Input as IEventInput;
+        }
+
+
+        /// <summary>
+        /// It has been required by modules which are designed to handle generic types of IEvent and need access to IModuleEvent.Output where available.
+        /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
+        /// directly. This can be done with <see cref="System.Reflection"/> or more efficiently using dynamic casting.
+        /// Eg. return ((dynamic)this).Output as IEventOutput;
+        /// </summary>
+        public IEventOutput GetEventOutput()
+        {
+            return ((dynamic)this).Output as IEventOutput;
+        }
+
+
+        /// <summary>
+        /// It has been required by modules which are designed to handle generic types of IEvent and need access to the setter for IModuleEvent.Output.
+        /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
+        /// directly. This can be done with <see cref="System.Reflection"/>.
+        /// </summary>
+        public void SetEventOutput(IEventOutput output)
+        {
+            // This purposely assumes that output exists on the event type and that typeof(output) is equal to typeof(this.Output).
+            // It will throw an exception where any of the above conditions fail. This is by design.
+            GetType().GetProperty("Output").SetValue(this, output);
         }
     }
 

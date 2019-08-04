@@ -28,6 +28,10 @@ using reblGreen.NetCore.Modules.Interfaces;
 
 namespace reblGreen.NetCore.Modules
 {
+    /// <summary>
+    /// Any module deriving from <see cref="Module"/> base must be decorated with ModuleAttribute before it can be loaded by
+    /// <see cref="ModuleHost"/>.
+    /// </summary>
     [Serializable, AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class ModuleAttribute : Attribute, IModuleAttribute
     {

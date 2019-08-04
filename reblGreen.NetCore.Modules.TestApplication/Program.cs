@@ -59,6 +59,10 @@ namespace reblGreen.NetCore.Modules.TestApplication
                     host.Handle(e);
                 }
 
+                var input = e.GetEventInput();
+                var output = e.GetEventOutput();
+                e.SetEventOutput(output);
+
                 if (e.Handled && e.Output != null)
                 {
                     Console.WriteLine(e.Output.Response);

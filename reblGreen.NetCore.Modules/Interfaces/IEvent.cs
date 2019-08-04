@@ -49,6 +49,9 @@ namespace reblGreen.NetCore.Modules.Interfaces
     }
 
 
+    /// <summary>
+    /// An object which implements IEvent can be handled by an instance which implements IEventHandler.
+    /// </summary>
     public interface IEvent
     {
         /// <summary>
@@ -58,7 +61,7 @@ namespace reblGreen.NetCore.Modules.Interfaces
         EventName Name { get; }
 
         /// <summary>
-        /// The Meta dictionary can be used to transfer and hold any generic data regarding the event between modules.
+        /// The Meta dictionary can be used to hold and transfer any generic or event specific data between modules.
         /// </summary>
         Dictionary<string, object> Meta { get; set; }
 
@@ -66,5 +69,32 @@ namespace reblGreen.NetCore.Modules.Interfaces
         /// Handled should return true only if the event was completed.
         /// </summary>
         bool Handled { get; set; }
+
+
+        /// <summary>
+        /// It has been required by modules which are designed to handle generic types of IEvent and need access to IModuleEvent.Input where available.
+        /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
+        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently using dynamic casting.
+        /// Eg. return ((dynamic)this).Input as IEventInput;
+        /// </summary>
+        IEventInput GetEventInput();
+
+
+        /// <summary>
+        /// It has been required by modules which are designed to handle generic types of IEvent and need access to IModuleEvent.Output where available.
+        /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
+        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently using dynamic casting.
+        /// Eg. return ((dynamic)this).Output as IEventOutput;
+        /// </summary>
+        IEventOutput GetEventOutput();
+
+
+        /// <summary>
+        /// It has been required by modules which are designed to handle generic types of IEvent and need access to the setter for IModuleEvent.Output.
+        /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
+        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently using dynamic casting.
+        /// Eg. ((dynamic)this).Output = output;
+        /// </summary>
+        void SetEventOutput(IEventOutput output);
     }
 }
