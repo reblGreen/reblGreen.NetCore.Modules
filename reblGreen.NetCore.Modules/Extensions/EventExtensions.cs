@@ -116,7 +116,6 @@ namespace reblGreen.NetCore.Modules
             if (@this.Meta != null && @this.Meta.ContainsKey(key))
             {
                 @this.Meta.Remove(key);
-
                 return true;
             }
 
@@ -127,9 +126,6 @@ namespace reblGreen.NetCore.Modules
         /// <summary>
         /// Sets a meta key/value pair on an event.
         /// </summary>
-        /// <param name="this"> </param>
-        /// <param name="key">  </param>
-        /// <param name="value"></param>
         public static void SetMetaValue(this IEvent @this, string key, object value, bool forceOverwrite = false)
         {
             if (@this.Meta == null)
@@ -140,9 +136,12 @@ namespace reblGreen.NetCore.Modules
             // Copying locally fixes any issues with cross-process/cross-domain EventHandlers.
             var local = new Dictionary<string, object>(@this.Meta);
 
-            if (local.ContainsKey(key) && forceOverwrite)
+            if (local.ContainsKey(key))
             {
-                local[key] = value;
+                if (forceOverwrite)
+                {
+                    local[key] = value;
+                }
             }
             else
             {
