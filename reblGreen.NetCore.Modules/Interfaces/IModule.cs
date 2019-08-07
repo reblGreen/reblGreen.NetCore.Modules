@@ -62,12 +62,6 @@ namespace reblGreen.NetCore.Modules.Interfaces
 
 
         /// <summary>
-        /// Contains the types implementing IEvent which can be handled by this IModules IEventHandler.
-        /// </summary>
-        IList<IEvent> Events { get; }
-
-        
-        /// <summary>
         /// The IModule should be marked as loaded and this property should be checked before any object which implements IEvent can be handled.
         /// </summary>
         bool Loaded { get; }
