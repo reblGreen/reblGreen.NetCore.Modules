@@ -74,15 +74,13 @@ namespace reblGreen.NetCore.Modules
         /// <summary>
         /// This allows the instance of IModule to inform IModuleHost of the priority in which it would like to handle
         /// IEvents. It means that if 2 or more instances of IModule handle the same types which implement IEvent, you
-        /// can control the order in which IModule handles the IEvent first. This can be overridden via
-        /// <see cref="IModuleHost.EventHandlePriority"/>.
+        /// can control the order in which IModule handles the IEvent first.
         /// </summary>
         public short HandlePriority { get; set; }
 
 
         /// <summary>
         /// This allows the instance of IModule to inform IModuleHost of the priority in which it should be loaded.
-        /// <see cref="IModuleHost.ModuleLoadPriority"/>.
         /// </summary>
         public short LoadPriority { get; set; }
 

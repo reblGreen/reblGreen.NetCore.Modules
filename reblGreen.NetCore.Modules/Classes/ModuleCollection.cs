@@ -100,12 +100,18 @@ namespace reblGreen.NetCore.Modules.Classes
             }
 
             // We add the containers and sort them by the order in which they should be loaded, which is specified using the
-            // ModuleDetails.ModuleLoadPriority property.
+            // ModuleAttributes.ModuleLoadPriority property.
 
             var containers = TypeManager.FindModules<Module>(Host, Host.WorkingDirectory, 1);
             Containers.AddRange(containers.OrderByDescending(module => module.ModuleDetails.LoadPriority));
 
-
+            // The modules are initially added to ModuleCollection in the order that they should handle modules. This is specified
+            // using the ModuleAttributes.EventHandlePriority property. Since ModuleCollection inherits from List<Type> it means that
+            // the ModuleCollection List<Type> can simply be reordered to change the event handle order. A useage example where this
+            // may be required could be if reblGreen.NetCore.Modules is being used to build a plugin based effects mixer for an audio
+            // stream event. You may wish to allow the user to change the order in which the effects modules process the audio stream
+            // event via an GUI with drag/drop. The modules in ModuleCollection would then be programmatically reordered to suit the
+            // user selection.
             AddRange(containers.OrderByDescending(module => module.ModuleDetails.HandlePriority).Select(module => module.ModuleType));
             Imported = true;
         }

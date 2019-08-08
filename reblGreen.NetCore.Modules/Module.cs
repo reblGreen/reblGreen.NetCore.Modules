@@ -33,12 +33,10 @@ using reblGreen.NetCore.Modules.Interfaces;
 namespace reblGreen.NetCore.Modules
 {
     /// <summary>
-    /// A Module is an <see cref="IEventHandler">IEventHandler</see> which can be loaded & manipulated by an <see cref="IModuleHost">IModuleHost</see>.
-    /// This class exposes members to the IModuleHost which identify both the IModule itself and what IEvents it is able to handle.
+    /// A Module is an <see cref="IEventHandler"/> which can be loaded and manipulated by an <see cref="IModuleHost"/>.
+    /// This class exposes members to the <see cref="ModuleHost"/>which identify both the IModule itself and what <see cref="IEvent"/>
+    /// instances it can handle.
     /// </summary>
-    /// <typeparam name="E">A type implementing IEvent which can be handled by this Modules IEventHandler.</typeparam>
-    /// <typeparam name="I">The IEventInput of the IEvent.</typeparam>
-    /// <typeparam name="O">The IEventOutput of the IEvent.</typeparam>
     [Serializable]
     [Module(Description = "This is an abstract module which can be inherited while creating a new Module Type.")]
     public abstract class Module : IModule
