@@ -61,25 +61,6 @@ namespace reblGreen.NetCore.Modules
         }
 
 
-        Version version;
-
-        /// <summary>
-        /// By default this property returns the assembly version. The module version can be used for dependency checks.
-        /// </summary>
-        public virtual Version Version
-        {
-            get
-            {
-                if (version == null)
-                {
-                    version = GetType().GetAssemblyInfo().Version;
-                }
-
-                return version;
-            }
-        }
-
-
         Uri path;
 
         /// <summary>

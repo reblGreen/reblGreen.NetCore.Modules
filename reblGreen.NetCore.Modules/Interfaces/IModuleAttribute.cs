@@ -36,7 +36,7 @@ namespace reblGreen.NetCore.Modules.Interfaces
 
 
         /// <summary>
-        /// 
+        /// Can be used to check for compatibility by other instances implementing IModule in case of a specific version dependancy.
         /// </summary>
         Version Version { get; }
 
@@ -67,7 +67,6 @@ namespace reblGreen.NetCore.Modules.Interfaces
 
         /// <summary>
         /// This allows the instance of IModule to inform IModuleHost of the priority in which it should be loaded.
-        /// <see cref="IModuleHost.ModuleLoadPriority"/>.
         /// </summary>
         short LoadPriority { get; }
 
