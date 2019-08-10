@@ -33,15 +33,30 @@ namespace reblGreen.NetCore.Modules
     [Serializable]
     public sealed class EventName
     {
+        /// <summary>
+        /// Holds the string value of the event name.
+        /// </summary>
         readonly string Value;
 
+
+        /// <summary>
+        /// Creates a new <see cref="EventName"/> from a string value.
+        /// </summary>
+        /// <param name="value"></param>
         public EventName(string value)
         {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new Exception("The event name can not be null.");
+            }
             Value = value;
         }
 
         #region Override IEqualityComparer methods
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override bool Equals(object obj)
         {
             if (obj is EventName name)
@@ -52,6 +67,9 @@ namespace reblGreen.NetCore.Modules
             return base.Equals(obj);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override int GetHashCode()
         {
             return Value.GetHashCode();
@@ -59,11 +77,17 @@ namespace reblGreen.NetCore.Modules
 
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override string ToString()
         {
             return Value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static EventName FromString(string s)
         {
             return new EventName(s);
@@ -71,21 +95,33 @@ namespace reblGreen.NetCore.Modules
 
         #region Override operators.
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator EventName(string s)
         {
             return new EventName(s);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator string(EventName s)
         {
             return s.Value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static bool operator == (EventName x, EventName y)
         {
             return x.Value == y.Value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static bool operator != (EventName x, EventName y)
         {
             return x.Value != y.Value;

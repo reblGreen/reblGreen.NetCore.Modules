@@ -33,7 +33,15 @@ namespace reblGreen.NetCore.Modules
     [Serializable]
     public sealed class ModuleName
     {
+        /// <summary>
+        /// Holds the string value of the module name.
+        /// </summary>
         readonly string Value;
+
+
+        /// <summary>
+        /// Creates a new <see cref="ModuleName"/> from a string value.
+        /// </summary>
         public ModuleName(string value)
         {
             Value = value;
@@ -41,6 +49,9 @@ namespace reblGreen.NetCore.Modules
 
         #region Override IEqualityComparer moethods.
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override bool Equals(object obj)
         {
             if (obj is ModuleName name)
@@ -51,6 +62,9 @@ namespace reblGreen.NetCore.Modules
             return base.Equals(obj);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override int GetHashCode()
         {
             return Value.GetHashCode();
@@ -58,12 +72,17 @@ namespace reblGreen.NetCore.Modules
 
         #endregion
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public override string ToString()
         {
             return Value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static ModuleName FromString(string s)
         {
             return new ModuleName(s);
@@ -71,21 +90,33 @@ namespace reblGreen.NetCore.Modules
 
         #region Override operators.
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator string(ModuleName s)
         {
             return s.Value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator ModuleName(string s)
         {
             return new ModuleName(s);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static bool operator == (ModuleName x, ModuleName y)
         {
             return x.Value == y.Value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static bool operator != (ModuleName x, ModuleName y)
         {
             return x.Value != y.Value;
