@@ -35,7 +35,7 @@ namespace reblGreen.NetCore.Modules.Interfaces
         Uri Path { get; }
         AssemblyLoader LoadContext { get; }
         Type ModuleType { get; }
-        IModuleAttribute ModuleDetails { get; }
+        IModuleAttribute ModuleAttributes { get; }
         Module Module { get; }
 
         void InitializeModule();

@@ -24,12 +24,13 @@
  */
 
 using System;
+using reblGreen.NetCore.Modules.Events;
 using reblGreen.NetCore.Modules.Interfaces;
 
 namespace reblGreen.NetCore.Modules.Classes
 {
     [Serializable]
-    public class ModuleContainer : IModuleContainer
+    public class ModuleContainer : IModuleContainer, IModule
     {
         public IModuleHost Host { get; private set; }
         public bool Initialized {  get { return Module != null; } }
@@ -52,18 +53,20 @@ namespace reblGreen.NetCore.Modules.Classes
         }
 
 
-        public IModuleAttribute ModuleDetails { get; internal set; }
-
-
         public Module Module { get; private set; }
 
+        public IModuleAttribute ModuleAttributes { get; internal set; }
+
+        public Uri WorkingDirectory { get { return Module.WorkingDirectory; } }
+
+        public bool Loaded { get { return Initialized && Module.Loaded; } }
 
         public ModuleContainer(Uri path, Type type, IModuleAttribute attribute, IModuleHost host)
         {
             Host = host;
             Path = path;
             ModuleType = type;
-            ModuleDetails = attribute;
+            ModuleAttributes = attribute;
             LoadContext = new AssemblyLoader(path);
         }
 
@@ -73,7 +76,7 @@ namespace reblGreen.NetCore.Modules.Classes
         {
             LoadContext.Load();
             var module = TypeManager.InstantiateModule(ModuleType, LoadContext);
-            module.ModuleAttributes = ModuleDetails;
+            module.ModuleAttributes = ModuleAttributes;
             module.Host = Host;
             Module = module;
         }
@@ -82,6 +85,61 @@ namespace reblGreen.NetCore.Modules.Classes
         {
             Module = null;
             LoadContext.Unload();
+        }
+
+        public T GetSetting<T>(string name, T @default = default(T))
+        {
+            return Module.GetSetting<T>(name, @default);
+        }
+
+        public void Log(LoggingEvent.Severity severity, params object[] args)
+        {
+            Module.Log(severity, args); ;
+        }
+
+        public void OnLoading()
+        {
+            Module.OnLoading();
+        }
+
+        public void OnLoaded()
+        {
+            Module.OnLoaded();
+        }
+
+        public void OnUnloading()
+        {
+            Module.OnUnloading();
+        }
+
+        public void OnUnloaded()
+        {
+            Module.OnUnloaded();
+        }
+
+        public bool CanHandle(IEvent e)
+        {
+            return Module.CanHandle(e);
+        }
+
+        public void Handle(IEvent e)
+        {
+            Module.Handle(e);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ModuleContainer container)
+            {
+                container.ModuleAttributes.Name.Equals(ModuleAttributes.Name);
+            }
+
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return ModuleAttributes.Name.GetHashCode();
         }
     }
 }

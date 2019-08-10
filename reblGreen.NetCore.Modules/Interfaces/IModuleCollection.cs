@@ -30,9 +30,6 @@ namespace reblGreen.NetCore.Modules.Interfaces
 {
     public interface IModuleCollection
     {
-        IModuleHost Host { get; }
-
-
         /// <summary>
         /// This should return a list containing the ModuleName for all known modules whether they are loaded or not.
         /// </summary>
@@ -49,7 +46,7 @@ namespace reblGreen.NetCore.Modules.Interfaces
         ///// <summary>
         ///// This method should tell the IModuleHost to import modules. Modules are imported from the ModuleHost working directory.
         ///// </summary>
-        //void ImportModules();
+        void ImportModules();
 
 
         /// <summary>
