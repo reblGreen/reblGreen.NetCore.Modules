@@ -194,8 +194,7 @@ namespace reblGreen.NetCore.Modules
         {
             // We generate a unique ID for the event and add it to the IEvent.Meta dictionary. This unique ID can be used to
             // Track and monitor the event during the handling process through the exposed EventsInProgress property.
-
-            var id = string.Format("{0}-{1}", e.GetHashCode().ToString("X2").ToLowerInvariant(), Guid.NewGuid());
+            var id = GenerateEventId(e);
             e.SetMetaValue("id", id);
 
             lock (_EventsInProgress)
@@ -211,6 +210,16 @@ namespace reblGreen.NetCore.Modules
             {
                 _EventsInProgress.Remove(id);
             }
+        }
+
+
+        /// <summary>
+        /// Internal method for generating a unique event id.
+        /// </summary>
+        private string GenerateEventId(IEvent e)
+        {
+            //return string.Format("{0}-{1}", e.Name.GetHashCode().ToString("x2"), Guid.NewGuid());
+            return Guid.NewGuid().ToString().Replace("-", null);
         }
     }
 }
