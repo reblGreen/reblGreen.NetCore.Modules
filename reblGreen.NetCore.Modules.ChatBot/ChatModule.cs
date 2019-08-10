@@ -93,6 +93,10 @@ namespace reblGreen.NetCore.Modules.ChatBot
                 if (@event.Input == null)
                 {
                     throw new NullReferenceException(string.Format("{0}.Input is null", @event.Name));
+
+                    // As suggested above we could add meta message rather than throwing exception. The implementation
+                    // is completely down to the developer and requirements. Obviously the following code can't be
+                    // reached. It exists for example only.
                     @event.SetMetaValue("errorMessage", string.Format("{0}.Input is null", @event.Name));
                     @event.Handled = true;
                 }
@@ -110,17 +114,22 @@ namespace reblGreen.NetCore.Modules.ChatBot
 
 
         /*
-         * A Module which implements IEventPostHandler<> 
+         * A Module which implements IEventPreHandler<> will receive the event before it is handled. This along with
+         * IEventPostHandler<> are useful for monitoring or manipulating or inspecting events before and after they
+         * have been processed.
          */
-        public void OnHandled(IEvent e)
+        public void OnBeforeHandle(IEvent e)
         {
             Console.WriteLine("...");
         }
 
+
         /*
-         * A Module which implements IEventPreHandler<
+         * A Module which implements IEventPostHandler<> will receive the event to this method after it has been handled
+         * by Host.Handle method. This along with IEventPreHandler<> are useful for monitoring or manipulating or inspecting
+         * events before and after they have been processed.
          */
-        public void OnBeforeHandle(IEvent e)
+        public void OnHandled(IEvent e)
         {
             Console.WriteLine("...");
         }

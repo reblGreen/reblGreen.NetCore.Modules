@@ -32,11 +32,21 @@ namespace reblGreen.NetCore.Modules.TestApplication
     {
         static void Main(string[] args)
         {
+            // Create a new module host
             ModuleHost host = new BasicModuleHost();
+
+            // Invoking ModuleHost.Modules.GetModuleNames method tells us which modules have been imported. We
+            // are calling this method for information only. Modules have not been loaded yet.
             var names = host.Modules.GetModuleNames();
 
+            // Now we load modules. Modules must be loaded otherwise they can not handle events.
             host.Modules.LoadModules();
 
+            // Importing module happens by default when the default ModuleHost is initialized but you can call
+            // ImportModules any time and any newly added modules will be loaded.
+            host.Modules.ImportModules();
+
+            // Writing console lines here has nothing to do with the functionality of reblGreen.NetCore.Modules
             Console.WriteLine("...");
             Console.WriteLine("...");
 
@@ -45,29 +55,47 @@ namespace reblGreen.NetCore.Modules.TestApplication
             Console.WriteLine("...");
             Console.WriteLine("...");
 
+            // Purely for testing to ensure we have an event.
             var testSolidEvent = host.Events.GetSolidEventFromName("reblGreen.NetCore.Modules.ChatBot.ChatModuleEvent");
+            
+            if (testSolidEvent == null)
+            {
+                throw new Exception("We have no chat event loaded.");
+            }
 
             while (true)
             {
+                // Waiting for user input...
                 var request = Console.ReadLine();
                 var e = new ChatModuleEvent();
 
+                // We created a new chat event and added the input text to the IEvent.Input object.
                 e.Input.Request = request;
 
+                // We don't really need to call CanHandle but currently used good for debugging.
                 if (host.CanHandle(e))
                 {
+                    // Here's the magic...
                     host.Handle(e);
                 }
+                else
+                {
+                    throw new Exception("Unable to handle the event.");
+                }
 
+                // Testing to see if we can get the input and output from the IEvent object... 
                 var input = e.GetEventInput();
                 var output = e.GetEventOutput();
                 e.SetEventOutput(output);
 
+                // Was our event hndled in the call to host.method Handle above?
                 if (e.Handled && e.Output != null)
                 {
+                    // Yes, so write out the response to the console...
                     Console.WriteLine(e.Output.Response);
                 }
                 
+                // More random and not required console writing.
                 Console.WriteLine("...");
                 Console.WriteLine("...");
             }

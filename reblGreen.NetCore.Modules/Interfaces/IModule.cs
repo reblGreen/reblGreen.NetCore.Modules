@@ -48,12 +48,6 @@ namespace reblGreen.NetCore.Modules.Interfaces
 
 
         /// <summary>
-        /// Can be used to check for compatibility by other instances implementing IModule in case of a specific version dependancy.
-        /// </summary>
-        Version Version { get; }
-
-
-        /// <summary>
         /// The WorkingDirectory property should return the absolute path to the directory the module was loaded from.
         /// This is used by the IModule to access external files which it may depend on such as a required file,
         /// external executable or resource.
