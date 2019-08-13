@@ -33,27 +33,37 @@ namespace reblGreen.NetCore.Modules.ChatBot.Events
     public class ChatModuleEvent : IEvent<ChatModuleEventInput, ChatModuleEventOutput>
     {
         /// <summary>
-        /// Each IEvent must specify a name
+        /// Each <see cref="IEvent"/> which is loaded into <see cref="ModuleHost"/> should have a unique
+        /// <see cref="EventName"/> which can be used to identify the event type where the concrete type of the
+        /// <see cref="IEvent"/> object is unknown.
         /// </summary>
         public EventName Name { get; } = "reblGreen.NetCore.Modules.ChatBot.ChatModuleEvent";
 
+
         /// <summary>
-        /// 
+        /// The Meta dictionary can be used to hold and transfer any generic or event specific data between modules
+        /// and return generic information to the requester.
         /// </summary>
         public Dictionary<string, object> Meta { get; set; }
 
+
         /// <summary>
-        /// 
+        /// This property should return true only if the <see cref="IEvent"/> was completed. This must be set by the
+        /// <see cref="IModule"/> which is handling the <see cref="IEvent"/>
         /// </summary>
         public bool Handled { get; set; }
 
+
         /// <summary>
-        /// 
+        /// The Input property must inherit <see cref="IEventInput"/> and acts as a placeholder for any properties, fields or other data
+        /// which can be passed to an <see cref="IEventHandler"/> as arguments.
         /// </summary>
         public ChatModuleEventInput Input { get; set; } = new ChatModuleEventInput();
 
+
         /// <summary>
-        /// 
+        /// The Output object inherits from <see cref="IEventOutput"/> and is used for returning any properties, fields or other data while
+        /// an <see cref="IEvent"/> is being handled by an <see cref="IEventHandler"/>.
         /// </summary>
         public ChatModuleEventOutput Output { get; set; }
 
@@ -61,7 +71,7 @@ namespace reblGreen.NetCore.Modules.ChatBot.Events
         /// <summary>
         /// It has been required by modules which are designed to handle generic types of IEvent and need access to IModuleEvent.Input where available.
         /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
-        /// directly. This can be done with <see cref="System.Reflection"/> or more efficiently using dynamic casting.
+        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently over time, due to DLR caching, using dynamic casting.
         /// Eg. return ((dynamic)this).Input as IEventInput;
         /// </summary>
         public IEventInput GetEventInput()
@@ -73,7 +83,7 @@ namespace reblGreen.NetCore.Modules.ChatBot.Events
         /// <summary>
         /// It has been required by modules which are designed to handle generic types of IEvent and need access to IModuleEvent.Output where available.
         /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
-        /// directly. This can be done with <see cref="System.Reflection"/> or more efficiently using dynamic casting.
+        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently over time, due to DLR caching, using dynamic casting.
         /// Eg. return ((dynamic)this).Output as IEventOutput;
         /// </summary>
         public IEventOutput GetEventOutput()
@@ -85,7 +95,9 @@ namespace reblGreen.NetCore.Modules.ChatBot.Events
         /// <summary>
         /// It has been required by modules which are designed to handle generic types of IEvent and need access to the setter for IModuleEvent.Output.
         /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
-        /// directly. This can be done with <see cref="System.Reflection"/>.
+        /// directly. This can be done using <see cref="System.Reflection"/>. DLR does not allow setting the <see cref="IEvent{I, O}.Output"/> property via
+        /// dynamic object when the known object type is <see cref="IEventOutput"/> due to additional type checks.
+        /// Eg. GetType().GetProperty("Output").SetValue(this, output);
         /// </summary>
         public void SetEventOutput(IEventOutput output)
         {

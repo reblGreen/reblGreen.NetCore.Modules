@@ -28,45 +28,47 @@ using System.Collections.Generic;
 namespace reblGreen.NetCore.Modules.Interfaces
 {
     /// <summary>
-    /// An object which implements IEvent can be handled by an instance which implements IEventHandler.
+    /// An object which implements <see cref="IEvent"/> can be handled by an instance which implements <see cref="IEventHandler"/>.
     /// </summary>
     public interface IEvent<I, O> : IEvent
         where I : IEventInput
         where O : IEventOutput
     {
         /// <summary>
-        /// The Input property must inherit IEventInput and acts as a placeholder for any properties, fields or other data which can be passed to
-        /// an IEventHandler as arguments.
+        /// The Input property must inherit <see cref="IEventInput"/> and acts as a placeholder for any properties, fields or other data
+        /// which can be passed to an <see cref="IEventHandler"/> as arguments.
         /// </summary>
         I Input { get; set; }
 
 
         /// <summary>
-        /// The Output object inherits from IEventOutput and is used for returning any properties, fields or other data while an IEvent is being
-        /// handled by an IEventHandler.
+        /// The Output object inherits from <see cref="IEventOutput"/> and is used for returning any properties, fields or other data while
+        /// an <see cref="IEvent"/> is being handled by an <see cref="IEventHandler"/>.
         /// </summary>
         O Output { get; set; }
     }
 
 
     /// <summary>
-    /// An object which implements IEvent can be handled by an instance which implements IEventHandler.
+    /// An object which implements <see cref="IEvent"/> can be handled by an instance which implements <see cref="IEventHandler"/>.
     /// </summary>
     public interface IEvent
     {
         /// <summary>
-        /// Each IEvent which is loaded into ModuleHost should have a unique name which can be used to identify the event type where the concrete
-        /// type of the IEvent object is unknown.
+        /// Each <see cref="IEvent"/> which is loaded into <see cref="ModuleHost"/> should have a unique <see cref="EventName"/> which can be used
+        /// to identify the event type where the concrete type of the <see cref="IEvent"/> object is unknown.
         /// </summary>
         EventName Name { get; }
 
         /// <summary>
-        /// The Meta dictionary can be used to hold and transfer any generic or event specific data between modules.
+        /// The Meta dictionary can be used to hold and transfer any generic or event specific data between modules and return generic information
+        /// to the requester.
         /// </summary>
         Dictionary<string, object> Meta { get; set; }
 
         /// <summary>
-        /// Handled should return true only if the event was completed.
+        /// This property should return true only if the <see cref="IEvent"/> was completed. This must be set by the <see cref="IModule"/> which is
+        /// handling the <see cref="IEvent"/>
         /// </summary>
         bool Handled { get; set; }
 
@@ -74,7 +76,7 @@ namespace reblGreen.NetCore.Modules.Interfaces
         /// <summary>
         /// It has been required by modules which are designed to handle generic types of IEvent and need access to IModuleEvent.Input where available.
         /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
-        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently using dynamic casting.
+        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently over time, due to DLR caching, using dynamic casting.
         /// Eg. return ((dynamic)this).Input as IEventInput;
         /// </summary>
         IEventInput GetEventInput();
@@ -83,7 +85,7 @@ namespace reblGreen.NetCore.Modules.Interfaces
         /// <summary>
         /// It has been required by modules which are designed to handle generic types of IEvent and need access to IModuleEvent.Output where available.
         /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
-        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently using dynamic casting.
+        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently over time, due to DLR caching, using dynamic casting.
         /// Eg. return ((dynamic)this).Output as IEventOutput;
         /// </summary>
         IEventOutput GetEventOutput();
@@ -92,8 +94,9 @@ namespace reblGreen.NetCore.Modules.Interfaces
         /// <summary>
         /// It has been required by modules which are designed to handle generic types of IEvent and need access to the setter for IModuleEvent.Output.
         /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
-        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently using dynamic casting.
-        /// Eg. ((dynamic)this).Output = output;
+        /// directly. This can be done using <see cref="System.Reflection"/>. DLR does not allow setting the <see cref="IEvent{I, O}.Output"/> property via
+        /// dynamic object when the known object type is <see cref="IEventOutput"/> due to additional type checks.
+        /// Eg. GetType().GetProperty("Output").SetValue(this, output);
         /// </summary>
         void SetEventOutput(IEventOutput output);
     }
