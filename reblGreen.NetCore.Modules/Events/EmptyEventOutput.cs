@@ -28,8 +28,12 @@ using reblGreen.NetCore.Modules.Interfaces;
 
 namespace reblGreen.NetCore.Modules.Events
 {
+    /// <summary>
+    /// This <see cref="IEventOutput"/> type can be used where no output data is required.
+    /// </summary>
     [Serializable]
-    public class LoggingEventOutput : IEventOutput
+    public class EmptyEventOutput : IEventOutput
     {
+        // This event output is intentionally empty.
     }
 }

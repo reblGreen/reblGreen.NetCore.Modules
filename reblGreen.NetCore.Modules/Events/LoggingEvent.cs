@@ -36,7 +36,7 @@ namespace reblGreen.NetCore.Modules.Events
     /// fail silently.
     /// </summary>
     [Serializable]
-    public class LoggingEvent : IEvent<LoggingEventInput, LoggingEventOutput>
+    public class LoggingEvent : IEvent<LoggingEventInput, EmptyEventOutput>
     {
         public enum Severity
         {
@@ -49,7 +49,7 @@ namespace reblGreen.NetCore.Modules.Events
 
         public LoggingEventInput Input { get; set; } = new LoggingEventInput();
 
-        public LoggingEventOutput Output { get; set; }
+        public EmptyEventOutput Output { get; set; }
 
         public EventName Name { get; } = "reblGreen.NetCore.Modules.Events.LoggingEvent";
 
