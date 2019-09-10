@@ -358,19 +358,29 @@ namespace reblGreen.NetCore.Modules.Classes
         /// </summary>
         public virtual void Handle(IEvent e)
         {
+            DateTime now;
+            TimeSpan then;
+
             OnBeforeHandle(e);
 
+            var meta = new Dictionary<string, string>();
             var handlers = GetLoadedModules(e);
 
             foreach(var handler in handlers)
             {
+                now = DateTime.UtcNow;
                 handler.Handle(e);
+                then = DateTime.UtcNow.Subtract(now);
+
+                meta.Add(handler.ModuleAttributes.Name, then.ToString());
 
                 if (e.Handled == true)
                 {
                     break;
                 }
             }
+
+            e.SetMetaValue("handlers", meta);
 
             OnHandled(e);
         }
