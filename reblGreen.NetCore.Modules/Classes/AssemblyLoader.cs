@@ -100,7 +100,7 @@ namespace reblGreen.NetCore.Modules.Classes
             var current = AppDomain.CurrentDomain.GetAssemblies();
 
             // It's possible that assemblyName can equal both the path to an assembly file location or the simple
-            // name of an assembly. We must compare against both when checking currently loaded assemblies.
+            // name of an assembly. We must compare against both when checking for currently loaded assemblies.
             var loaded = current.FirstOrDefault(x => x.Location == assemblyName || x.GetName().Name == assemblyName);
 
             if (loaded != null)

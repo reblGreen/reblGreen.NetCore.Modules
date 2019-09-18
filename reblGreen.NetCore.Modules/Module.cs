@@ -125,8 +125,9 @@ namespace reblGreen.NetCore.Modules
         {
             /*
              * This overridable method acts is a wrapper for creating a GetSettingEvent and invoking IModuleHost.Handle on it. If no module exists to handle the
-             * GetSettingEvent or if the return type is unexpected we do some logging using the IModule.Log method. See below.
+             * GetSettingEvent or if the return type is unexpected we do some logging using the IModule.Log method, see below...
              */
+
             var getSettingEvent = new GetSettingEvent();
             getSettingEvent.Input.ModuleName = ModuleAttributes.Name;
             getSettingEvent.Input.SettingName = name;
@@ -135,14 +136,21 @@ namespace reblGreen.NetCore.Modules
             if (getSettingEvent.Handled && getSettingEvent.Output != null)
             {
                 var setting = getSettingEvent.Output.Setting;
-                var type = typeof(T);
-
+                
                 if (setting != null)
                 {
+                    // We check that the setting type is correct before returning it.
                     if (setting is T s)
                     {
                         return s;
                     }
+
+                    // If the setting is not the requested type, we log a message suggesting the type format of the setting so that the developer can
+                    // request the setting in the correct format and use casting or an alternative conversion method to format the setting as required.
+                    // An example here is that if the setting is parsed into a dictionary using JSON, the serializer may have parsed a numeric value
+                    // into an incorrect value type. Where a double may be required, the setting may have been parsed into a float. In this case, the
+                    // float setting must be requested using this method and then cast to a double after the setting value is retrieved.
+                    var type = typeof(T);
 
                     Log(LoggingEvent.Severity.Warning,
                         new InvalidCastException(
@@ -151,8 +159,6 @@ namespace reblGreen.NetCore.Modules
 
                     return @default;
                 }
-
-                Log(LoggingEvent.Severity.Debug, new NullReferenceException("GetSettingEvent.Output.Setting is null."), getSettingEvent);
 
                 return @default;
             }
@@ -181,10 +187,16 @@ namespace reblGreen.NetCore.Modules
              * If a module does not exist to handle an IEvent of type LoggingEvent logging will fail silently. If we were to attempt
              * logging of a failed LoggingEvent we would create an infinite loop of logging fails... I hear StackOverflowException.
              */
-            var loggingEvent = new LoggingEvent();
-            loggingEvent.Input.Severity = severity;
-            loggingEvent.Input.Arguments = arguments.ToList();
-            Host.Handle(loggingEvent);
+
+            if (arguments != null && arguments.Length > 0)
+            {
+                // We insert the module name at index 0 of the arguments array so that it can be output by the LoggingEvent event handler.
+                var loggingEvent = new LoggingEvent();
+                loggingEvent.Input.Severity = severity;
+                loggingEvent.Input.Arguments = arguments.ToList();
+                loggingEvent.Input.Arguments.Insert(0, this.ModuleAttributes.Name);
+                Host.Handle(loggingEvent);
+            }
         }
         
 

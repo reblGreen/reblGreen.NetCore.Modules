@@ -15,6 +15,7 @@
     <PackageTags>event driven plugins plugin modules module modular framework architecture</PackageTags>
     <PackageLicenseUrl>https://tldrlegal.com/license/mit-license</PackageLicenseUrl>
     <Description>A .NET Core open-source framework for constructing event-driven modular systems. This project was started as a simple project which demonstrated a basic implementation of .NET Managed Extensibility Framework (MEF). It has since grown into an advanced framework designed to simplify building cross-platform plugin-based or modular applications using .NET and platforms which support .NET Core class libraries.</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
