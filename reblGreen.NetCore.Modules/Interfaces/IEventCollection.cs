@@ -43,7 +43,7 @@ namespace reblGreen.NetCore.Modules.Interfaces
         /// </summary>
         /// <param name="type"></param>
         /// <returns>Solid instance of the relevant type based on the string.</returns>
-        IEvent GetSolidEventFromType<T>(T type) where T : IEvent<IEventInput, IEventOutput>;
+        IEvent GetSolidEventFromType<T, I, O>(T type) where T : IEvent<I, O> where I : struct, IEventInput where O : struct, IEventOutput;
 
 
         /// <summary>

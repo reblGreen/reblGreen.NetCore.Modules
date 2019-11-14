@@ -30,7 +30,7 @@ using reblGreen.NetCore.Modules.Interfaces;
 namespace reblGreen.NetCore.Modules.Events
 {
     [Serializable]
-    public class LoggingEventInput : IEventInput
+    public struct LoggingEventInput : IEventInput
     {
         /// <summary>
         /// 

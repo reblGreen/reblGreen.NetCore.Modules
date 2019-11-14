@@ -86,27 +86,29 @@ namespace reblGreen.NetCore.Modules.ChatBot
             if (e is ChatModuleEvent @event)
             {
                 /*
-                 *ChatModuleEvent.Input should be set by requester but as a failsafe we check for null reference.
+                 * ChatModuleEvent.Input should be set by requester but as a failsafe we check for null reference.
                  * We're just throwing an exception here for simplicity but as an example, you could add an error
                  * message to the IEvent.Meta and set e.Handled to true so no further proccessing will occur.
                  */
-                if (@event.Input == null)
-                {
-                    throw new NullReferenceException(string.Format("{0}.Input is null", @event.Name));
+                //if (@event.Input == null)
+                //{
+                //    throw new NullReferenceException(string.Format("{0}.Input is null", @event.Name));
 
-                    // As suggested above we could add meta message rather than throwing exception. The implementation
-                    // is completely down to the developer and requirements. Obviously the following code can't be
-                    // reached. It exists for example only.
-                    @event.SetMetaValue("errorMessage", string.Format("{0}.Input is null", @event.Name));
-                    @event.Handled = true;
-                }
+                //    // As suggested above we could add meta message rather than throwing exception. The implementation
+                //    // is completely down to the developer and requirements. Obviously the following code can't be
+                //    // reached. It exists for example only.
+                //    @event.SetMetaValue("errorMessage", string.Format("{0}.Input is null", @event.Name));
+                //    @event.Handled = true;
+                //}
 
                 /* Further steps should be taken to validate more complex types of IEventInput as required.
                  * We've validated the input so now we create the output and set the Handled property to
                  * true so ModuleHost will not send this event to any other modules to handle.
                  */
-                @event.Output = new ChatModuleEventOutput();
-                @event.Output.Response = Chat.GetResponse(@event.Input.Request.ToLowerInvariant());
+                @event.Output = new ChatModuleEventOutput()
+                {
+                    Response = Chat.GetResponse(@event.Input.Request.ToLowerInvariant())
+                };
                 @event.Handled = true;
                 return;
             }

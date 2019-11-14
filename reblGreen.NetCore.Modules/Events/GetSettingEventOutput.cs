@@ -29,7 +29,7 @@ using reblGreen.NetCore.Modules.Interfaces;
 namespace reblGreen.NetCore.Modules.Events
 {
     [Serializable]
-    public class GetSettingEventOutput : IEventOutput
+    public struct GetSettingEventOutput : IEventOutput
     {
         /// <summary>
         /// 

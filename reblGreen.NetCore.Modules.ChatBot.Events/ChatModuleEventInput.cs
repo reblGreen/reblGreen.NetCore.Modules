@@ -29,7 +29,7 @@ using reblGreen.NetCore.Modules.Interfaces;
 namespace reblGreen.NetCore.Modules.ChatBot.Events
 {
     [Serializable]
-    public class ChatModuleEventInput : IEventInput
+    public struct ChatModuleEventInput : IEventInput
     {
         public string Request { get; set; }
     }

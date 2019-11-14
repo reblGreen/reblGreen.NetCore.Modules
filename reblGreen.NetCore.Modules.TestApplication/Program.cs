@@ -70,7 +70,10 @@ namespace reblGreen.NetCore.Modules.TestApplication
                 var e = new ChatModuleEvent();
 
                 // We created a new chat event and added the input text to the IEvent.Input object.
-                e.Input.Request = request;
+                e.Input = new ChatModuleEventInput()
+                {
+                    Request = request
+                };
 
                 // We don't really need to call CanHandle but currently used good for debugging.
                 if (host.CanHandle(e))
@@ -89,7 +92,7 @@ namespace reblGreen.NetCore.Modules.TestApplication
                 e.SetEventOutput(output);
 
                 // Was our event hndled in the call to host.method Handle above?
-                if (e.Handled && e.Output != null)
+                if (e.Handled /*&& e.Output != null*/)
                 {
                     // Yes, so write out the response to the console...
                     Console.WriteLine(e.Output.Response);

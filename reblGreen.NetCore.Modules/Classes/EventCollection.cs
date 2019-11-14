@@ -103,7 +103,7 @@ namespace reblGreen.NetCore.Modules.Classes
         }
 
 
-        public IEvent GetSolidEventFromType<T>(T type) where T : IEvent<IEventInput, IEventOutput>
+        public IEvent GetSolidEventFromType<T, I, O>(T type) where T : IEvent<I, O> where I : struct, IEventInput where O : struct, IEventOutput
         {
             var instantiated = Instantiated.FirstOrDefault(i => i.Key == typeof(T));
             if (instantiated.Equals(default(KeyValuePair<Type, IEvent>)))

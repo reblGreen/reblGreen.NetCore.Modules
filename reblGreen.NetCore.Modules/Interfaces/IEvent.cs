@@ -31,8 +31,8 @@ namespace reblGreen.NetCore.Modules.Interfaces
     /// An object which implements <see cref="IEvent"/> can be handled by an instance which implements <see cref="IEventHandler"/>.
     /// </summary>
     public interface IEvent<I, O> : IEvent
-        where I : IEventInput
-        where O : IEventOutput
+        where I : struct, IEventInput
+        where O : struct, IEventOutput
     {
         /// <summary>
         /// The Input property must inherit <see cref="IEventInput"/> and acts as a placeholder for any properties, fields or other data

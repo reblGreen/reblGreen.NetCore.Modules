@@ -32,7 +32,7 @@ namespace reblGreen.NetCore.Modules.Events
     /// This <see cref="IEventOutput"/> type can be used where no output data is required.
     /// </summary>
     [Serializable]
-    public class EmptyEventOutput : IEventOutput
+    public struct EmptyEventOutput : IEventOutput
     {
         // This event output is intentionally empty.
     }

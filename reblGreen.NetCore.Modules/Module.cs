@@ -129,11 +129,14 @@ namespace reblGreen.NetCore.Modules
              */
 
             var getSettingEvent = new GetSettingEvent();
-            getSettingEvent.Input.ModuleName = ModuleAttributes.Name;
-            getSettingEvent.Input.SettingName = name;
+            getSettingEvent.Input = new GetSettingEventInput
+            {
+                ModuleName = ModuleAttributes.Name,
+                SettingName = name
+            };
             Host.Handle(getSettingEvent);
 
-            if (getSettingEvent.Handled && getSettingEvent.Output != null)
+            if (getSettingEvent.Handled)
             {
                 var setting = getSettingEvent.Output.Setting;
                 
@@ -192,8 +195,12 @@ namespace reblGreen.NetCore.Modules
             {
                 // We insert the module name at index 0 of the arguments array so that it can be output by the LoggingEvent event handler.
                 var loggingEvent = new LoggingEvent();
-                loggingEvent.Input.Severity = severity;
-                loggingEvent.Input.Arguments = arguments.ToList();
+                loggingEvent.Input = new LoggingEventInput()
+                {
+                    Severity = severity,
+                    Arguments = arguments.ToList()
+                };
+
                 loggingEvent.Input.Arguments.Insert(0, this.ModuleAttributes.Name);
                 Host.Handle(loggingEvent);
             }
