@@ -69,41 +69,38 @@ namespace reblGreen.NetCore.Modules.ChatBot.Events
 
 
         /// <summary>
-        /// It has been required by modules which are designed to handle generic types of IEvent and need access to IModuleEvent.Input where available.
-        /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
-        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently over time, due to DLR caching, using dynamic casting.
-        /// Eg. return ((dynamic)this).Input as IEventInput;
+        /// It has been required by modules which are designed to handle generic type of IEvent and need access to IModuleEvent.Input when the generic
+        /// type definition of the IEvent{} may be unknown at runtime and strict casting is unavailable. We must expose Input and Output objects via
+        /// non-generic IEvent interface.
         /// </summary>
         public IEventInput GetEventInput()
         {
-            return ((dynamic)this).Input as IEventInput;
+            return Input;
         }
 
 
         /// <summary>
-        /// It has been required by modules which are designed to handle generic types of IEvent and need access to IModuleEvent.Output where available.
-        /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
-        /// directly. This can be done using <see cref="System.Reflection"/> or more efficiently over time, due to DLR caching, using dynamic casting.
-        /// Eg. return ((dynamic)this).Output as IEventOutput;
+        /// It has been required by modules which are designed to handle generic type of IEvent and need access to IModuleEvent.Output when the generic
+        /// type definition of the IEvent{} may be unknown at runtime and strict casting is unavailable. We must expose Input and Output objects via
+        /// non-generic IEvent interface.
         /// </summary>
         public IEventOutput GetEventOutput()
         {
-            return ((dynamic)this).Output as IEventOutput;
+            return Output;
         }
 
 
         /// <summary>
-        /// It has been required by modules which are designed to handle generic types of IEvent and need access to the setter for IModuleEvent.Output.
-        /// Since directly casting to <see cref="IEvent{I, O}"/> in not allowed we must expose and handle this implementation through <see cref="IEvent"/>
-        /// directly. This can be done using <see cref="System.Reflection"/>. DLR does not allow setting the <see cref="IEvent{I, O}.Output"/> property via
-        /// dynamic object when the known object type is <see cref="IEventOutput"/> due to additional type checks.
-        /// Eg. GetType().GetProperty("Output").SetValue(this, output);
+        /// It has been required by modules which are designed to handle generic type of IEvent and need access to set IModuleEvent.Output when the generic
+        /// type definition of IEvent{} may be unknown at runtime and strict casting is unavailable. We must expose a method to set Output object via the
+        /// non-generic IEvent interface.
         /// </summary>
         public void SetEventOutput(IEventOutput output)
         {
-            // This purposely assumes that output exists on the event type and that typeof(output) is equal to typeof(this.Output).
-            // It will throw an exception where any of the above conditions fail. This is by design.
-            GetType().GetProperty("Output").SetValue(this, output);
+            if (output is ChatModuleEventOutput o)
+            {
+                Output = o;
+            }
         }
     }
 }
