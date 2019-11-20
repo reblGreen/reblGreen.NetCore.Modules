@@ -218,7 +218,6 @@ namespace reblGreen.NetCore.Modules
         /// </summary>
         private string GenerateEventId(IEvent e)
         {
-            //return string.Format("{0}-{1}", e.Name.GetHashCode().ToString("x2"), Guid.NewGuid());
             return Guid.NewGuid().ToString().Replace("-", null);
         }
     }

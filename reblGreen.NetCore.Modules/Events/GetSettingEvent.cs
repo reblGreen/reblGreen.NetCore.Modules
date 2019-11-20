@@ -40,7 +40,7 @@ namespace reblGreen.NetCore.Modules.Events
         /// <summary>
         /// 
         /// </summary>
-        public GetSettingEventInput Input { get; set; } = new GetSettingEventInput();
+        public GetSettingEventInput Input { get; set; }
 
 
         /// <summary>

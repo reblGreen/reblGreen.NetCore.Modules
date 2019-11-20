@@ -53,7 +53,7 @@ namespace reblGreen.NetCore.Modules.Events
         /// <summary>
         /// 
         /// </summary>
-        public LoggingEventInput Input { get; set; } = new LoggingEventInput();
+        public LoggingEventInput Input { get; set; }
 
 
         /// <summary>

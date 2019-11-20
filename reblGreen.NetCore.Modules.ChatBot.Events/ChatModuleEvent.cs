@@ -58,7 +58,7 @@ namespace reblGreen.NetCore.Modules.ChatBot.Events
         /// The Input property must inherit <see cref="IEventInput"/> and acts as a placeholder for any properties, fields or other data
         /// which can be passed to an <see cref="IEventHandler"/> as arguments.
         /// </summary>
-        public ChatModuleEventInput Input { get; set; } = new ChatModuleEventInput();
+        public ChatModuleEventInput Input { get; set; }
 
 
         /// <summary>
