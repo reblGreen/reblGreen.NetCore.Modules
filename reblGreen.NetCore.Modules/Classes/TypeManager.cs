@@ -115,20 +115,29 @@ namespace reblGreen.NetCore.Modules.Classes
 
         private static IList<Type> GetUseableTypes(Uri assemblyPath, Type type)
         {
-            var loader = new AssemblyLoader(assemblyPath);
-            var assembly = loader.Load();
-
             var ret = new List<Type>();
-            
-            foreach (Type t in assembly.GetExportedTypes())
-            {
-                if ((type == t || type.IsAssignableFrom(t)) && !t.IsAbstract && !t.IsInterface)
-                {
-                    ret.Add(t);
-                }
-            }
 
-            loader.Unload();
+            // Wrapped try/catch for instances where a dll or exe file can not be loaded with .NET reflection, in this case we
+            // would presume that the assembly being loaded is not a .NET assembly and therefore can not contain any useable
+            // types.
+            try
+            {
+                var loader = new AssemblyLoader(assemblyPath);
+                var assembly = loader.Load();
+
+
+                foreach (Type t in assembly.GetExportedTypes())
+                {
+                    if ((type == t || type.IsAssignableFrom(t)) && !t.IsAbstract && !t.IsInterface)
+                    {
+                        ret.Add(t);
+                    }
+                }
+
+                loader.Unload();
+            }
+            catch { }            
+
             return ret;
         }
 
