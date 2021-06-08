@@ -84,6 +84,15 @@ namespace reblGreen.NetCore.Modules
         /// </summary>
         public short LoadPriority { get; set; }
 
+
+        /// <summary>
+        /// This property tells the ModuleHost to fully load the instance of IModule before loading other modules.
+        /// This will work alongside LoadPriority but should be considered as loading of primary and secondary modules
+        /// where an IModule instance with LoadFirst set to true would trigger both OnLoading() and Onloaded() before
+        /// other module instances.
+        /// </summary>
+        public bool LoadFirst { get; set; }
+
         
         /// <summary>
         /// Returns a unique ID for the IModule instance.

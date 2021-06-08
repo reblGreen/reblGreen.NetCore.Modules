@@ -203,6 +203,46 @@ namespace reblGreen.NetCore.Modules.Classes
                 }
             }
 
+
+            // Look for IModules with the IModuleAttribute.LoadFirst property set to true and trigger these to fully load before other modules.
+            var loadFirst = Containers.Where(c => c.ModuleAttributes.LoadFirst == true);
+
+            if (loadFirst != null && loadFirst.Count() > 0)
+            {
+                foreach (var c in loadFirst)
+                {
+                    if (modules != null && !modules.Contains(c.ModuleAttributes.Name))
+                    {
+                        continue;
+                    }
+
+                    // Invoke the OnLoading method on each module in the order in which they should be loaded.
+                    // We set the loaded property to true here so that any dependant module can raise events to
+                    // its dependencies while loading.
+                    if (!c.Module.Loaded)
+                    {
+                        c.Module.OnLoading();
+                        c.Module.Loaded = true;
+                    }
+                }
+
+                foreach (var c in loadFirst)
+                {
+                    if (modules != null && !modules.Contains(c.ModuleAttributes.Name))
+                    {
+                        continue;
+                    }
+
+                    // Finally we invoke OnLoaded on each module in the order in which they should be loaded. This is decided
+                    // in the ImportModules method and when the imported modules are added to this collection.
+                    if (c.Module.Loaded)
+                    {
+                        c.Module.OnLoaded();
+                    }
+                }
+            }
+
+
             foreach (var c in Containers)
             {
                 if (modules != null && !modules.Contains(c.ModuleAttributes.Name))
