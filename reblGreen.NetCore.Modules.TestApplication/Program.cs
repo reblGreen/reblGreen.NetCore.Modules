@@ -25,6 +25,7 @@
 
 using System;
 using reblGreen.NetCore.Modules.ChatBot.Events;
+using reblGreen.NetCore.Modules.Interfaces;
 
 namespace reblGreen.NetCore.Modules.TestApplication
 {
@@ -45,6 +46,8 @@ namespace reblGreen.NetCore.Modules.TestApplication
             // Importing module happens by default when the default ModuleHost is initialized but you can call
             // ImportModules any time and any newly added modules will be loaded.
             host.Modules.ImportModules();
+
+            var modulesList = host.Modules.GetModulesByType<IModule>();
 
             // Writing console lines here has nothing to do with the functionality of reblGreen.NetCore.Modules
             Console.WriteLine("...");

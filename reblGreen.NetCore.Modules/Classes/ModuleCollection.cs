@@ -92,7 +92,7 @@ namespace reblGreen.NetCore.Modules.Classes
         /// </summary>
         public virtual IList<IModule> GetModulesByType<T>() where T : IModule
         {
-            return Containers.Where(c => c.ModuleType.IsAssignableFrom(typeof(T))).Select(c => c.Module as IModule).ToList();
+            return Containers.Where(c => typeof(T).IsAssignableFrom(c.ModuleType)).Select(c => c.Module as IModule).ToList();
         }
 
 
