@@ -142,9 +142,9 @@ namespace reblGreen.NetCore.Modules.Classes
                     @new => !Containers.Any(
                         current => @new.ModuleAttributes.Name.Equals(current.ModuleAttributes.Name)
                     )
-                ).OrderByDescending(module => module.ModuleAttributes.LoadPriority));
+                ).OrderBy(module => module.ModuleAttributes.LoadPriority));
 
-            // The modules are initially added to ModuleCollection in the order that they should handle modules. This is specified
+            // The modules are initially added to ModuleCollection in the order that they should handle events. This is specified
             // using the ModuleAttributes.EventHandlePriority property. Since ModuleCollection inherits from List<Type> it means that
             // the ModuleCollection List<Type> can simply be reordered to change the event handle order. A useage example where this
             // may be required could be if reblGreen.NetCore.Modules is being used to build a plugin based effects mixer for an audio
@@ -152,7 +152,7 @@ namespace reblGreen.NetCore.Modules.Classes
             // event via an GUI with drag/drop. The modules in ModuleCollection would then be programmatically reordered to suit the
             // user selection.
             Clear();
-            AddRange(Containers.OrderByDescending(container => container.ModuleAttributes.HandlePriority).Select(container => container as IModule));
+            AddRange(Containers.OrderBy(container => container.ModuleAttributes.HandlePriority).Select(container => container as IModule));
         }
 
 
